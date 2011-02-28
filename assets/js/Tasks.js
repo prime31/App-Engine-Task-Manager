@@ -72,6 +72,8 @@ main.tasks = {
 		$( 'showCompletedLink' ).addClass( 'hide' );
 		main.tasks.setTitle( 'Completed Tasks' );
 		
+		main.setTitle( 'Completed Tasks' );
+		
 		// cancel any currently running request
 		if( main.tasks.request )
 			main.tasks.request.cancel;

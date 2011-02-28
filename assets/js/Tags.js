@@ -58,6 +58,7 @@ main.tags = {
 		ele.addClass( 'selected' );
 		
 		var tag = ele.retrieve( 'tag' );
+		main.setTitle( 'Tag: ' + tag );
 		main.fireEvent( 'selectedTagChanged', tag );
 	},
 	

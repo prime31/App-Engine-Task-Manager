@@ -60,6 +60,8 @@ main.projects = {
 		var projectId = ele.get( 'data-id' );
 		var project = main.projects.getProjectForProjectId( projectId );
 		
+		main.setTitle( project.name );
+		
 		main.fireEvent( 'selectedProjectChanged', project );
 	},
 	

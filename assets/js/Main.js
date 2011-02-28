@@ -75,6 +75,11 @@ var Main = new Class({
 		var ele = document.id( 'tagList' ).getElement( 'li.selected' );
 		if( ele )
 			ele.removeClass( 'selected' );
+	},
+	
+	setTitle: function( title )
+	{
+		$$( 'title' )[0].innerHTML = title;
 	}
 
 });
