@@ -1,0 +1,127 @@
+Add tag
+<form method="post" action="/tags/add" target="_blank">
+	tag: <input type="text" name="tag" /><br />
+	<input name="Submit" type="submit" value="Submit" />
+</form>
+
+
+Remove tag
+<form method="post" action="/tags/remove" target="_blank">
+	tag: <input type="text" name="tag" /><br />
+	<input name="Submit" type="submit" value="Submit" />
+</form>
+
+
+Rename tag
+<form method="post" action="/tags/rename" target="_blank">
+	old tag: <input type="text" name="oldTag" /><br />
+	new tag: <input type="text" name="newTag" /><br />
+	<input name="Submit" type="submit" value="Submit" />
+</form>
+
+
+
+Add project
+<form method="post" action="/projects/add" target="_blank">
+	name: <input type="text" name="projectName" /><br />
+	<input name="Submit" type="submit" value="Submit" />
+</form>
+
+
+Rename project
+<form method="post" action="/projects/rename" target="_blank">
+	id: <input type="text" name="projectId" /><br />
+	name: <input type="text" name="projectName" /><br />
+	<input name="Submit" type="submit" value="Submit" />
+</form>
+
+
+Remove project
+<form method="post" action="/projects/remove" target="_blank">
+	id: <input type="text" name="projectId" /><br />
+	<input name="Submit" type="submit" value="Submit" />
+</form>
+
+
+Add task
+<form method="post" action="/tasks/add" target="_blank">
+	projectId: <input type="text" name="projectId" /><br />
+	description: <input type="text" name="description" /><br />
+	tags: <input type="text" name="tags" /><br />
+	title: <input type="text" name="title" /><br />
+	<input name="Submit" type="submit" value="Submit" />
+</form>
+
+
+Edit task
+<form method="post" action="/tasks/edit" target="_blank">
+	taskId: <input type="text" name="taskId" /><br />
+	projectId: <input type="text" name="projectId" /><br />
+	description: <input type="text" name="description" /><br />
+	tags: <input type="text" name="tags" /><br />
+	title: <input type="text" name="title" /><br />
+	<input name="Submit" type="submit" value="Submit" />
+</form>
+
+
+Remove task
+<form method="post" action="/tasks/remove" target="_blank">
+	taskId: <input type="text" name="taskId" /><br />
+	projectId: <input type="text" name="projectId" /><br />
+	<input name="Submit" type="submit" value="Submit" />
+</form>
+
+
+Task important
+<form method="post" action="/tasks/important" target="_blank">
+	taskId: <input type="text" name="taskId" /><br />
+	projectId: <input type="text" name="projectId" /><br />
+	important: <input type="text" name="important" /><br />
+	<input name="Submit" type="submit" value="Submit" />
+</form>
+
+
+Task completed
+<form method="post" action="/tasks/completed" target="_blank">
+	taskId: <input type="text" name="taskId" /><br />
+	projectId: <input type="text" name="projectId" /><br />
+	completed: <input type="text" name="completed" /><br />
+	<input name="Submit" type="submit" value="Submit" />
+</form>
+
+
+Add comment
+<form method="post" action="/comments/add" target="_blank">
+	taskId: <input type="text" name="taskId" /><br />
+	projectId: <input type="text" name="projectId" /><br />
+	comment: <input type="text" name="comment" /><br />
+	<input name="Submit" type="submit" value="Submit" />
+</form>
+
+
+Remove comment
+<form method="post" action="/comments/remove" target="_blank">
+	commentId: <input type="text" name="commentId" /><br />
+	taskId: <input type="text" name="taskId" /><br />
+	projectId: <input type="text" name="projectId" /><br />
+	<input name="Submit" type="submit" value="Submit" />
+</form>
+
+
+Add image
+<form name="newad" method="post" enctype="multipart/form-data"  action="/images/add" target="_blank">
+	taskId: <input type="text" name="taskId" value="" /><br />
+	projectId: <input type="text" name="projectId" /><br />
+	image: <input type="file" name="image" /><br />
+	<input name="Submit" type="submit" value="Upload image">
+</form>
+
+
+Remove image
+<form method="post" action="/images/remove" target="_blank">
+	imageId: <input type="text" name="imageId" /><br />
+	taskId: <input type="text" name="taskId" value="" /><br />
+	projectId: <input type="text" name="projectId" /><br />
+	<input name="Submit" type="submit" value="Submit" />
+</form>
+

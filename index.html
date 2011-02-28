@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+
+<title></title>
+
+<meta name="viewport" content="width=840" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+<link href="/assets/css/reset.css" media="all" rel="stylesheet" type="text/css" />
+<link href="/assets/css/header.css" media="all" rel="stylesheet" type="text/css" />
+<link href="/assets/css/site.css" media="all" rel="stylesheet" type="text/css" />
+<link href="/assets/css/west.css" media="all" rel="stylesheet" type="text/css" />
+<link href="/assets/css/main.css" media="all" rel="stylesheet" type="text/css" />
+<link href="/assets/css/popovers.css" media="all" rel="stylesheet" type="text/css" />
+<link href="/assets/css/TinyAlert.css" media="all" rel="stylesheet" type="text/css" />
+<link href="/assets/css/Impromptu.css" media="all" rel="stylesheet" type="text/css" />
+<link href="/assets/css/Autocompleter.css" media="all" rel="stylesheet" type="text/css" />
+
+
+</head>
+<body>
+
+
+<div id="header">
+	<a title="" class="newTask">
+		<span class="icon">New Task</span>
+		<span class="divider"></span>
+	</a>
+	
+	<div class="search">
+		<input type="text" class="query" />
+		<a title="Clear search query" class="clear-search"><ins></ins></a>
+	</div>
+</div>
+
+
+<div id="west">
+	<div>
+		<h3>Projects</h3>
+		<ul id="projectList" class="projectList"></ul>
+	</div>
+	
+	<div class="marginTop30" style="position: relative;">
+		<h3>Tags</h3>
+		
+		<div class="scrollBar">
+			<div class="scrollHandle"></div>
+		</div>
+		
+		<div id="tagListWrapper">
+			<ul id="tagList" class="projectList tagList"></ul>
+		</div>
+	</div>
+	
+	<div class="action-bar-wrap">
+		<div class="side-action-bar">
+			<div class="actions">
+				<div class="hide action toggle-lists up"><a><ins class="toggle alt"></ins></a></div>
+				<div class="action new-action"><a><ins class="add"></ins></a></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div id="main">
+	<div>
+		<div class="task-lists">
+			<h3 class="project hide" style="">
+				<a class="back">
+					<ins class="hide"></ins><span class="title"></span>
+				</a>
+				<a id="showCompletedLink" class="completed right">
+					<ins></ins>show completed
+				</a>
+			</h3>
+		
+			<ul class="taskList"></ul>
+		</div>
+	</div>
+</div>
+
+
+<!-- ######### TEMPLATES ######### -->
+<div id="tagAndProjectTemplate" class="hide">
+	<li><ins></ins><div></div></li>
+</div>
+
+<div id="taskTemplate" class="hide">
+	<li class="task noSelect">
+		<div class="checker">
+			<input type="checkbox" />
+		</div>
+		<div class="task-main">
+			<strong class="projectName"></strong>
+			<a class="newTask" href="#"></a>
+		</div>
+
+		<div class="overlay">
+			<span class="flagged"></span>
+			<ul class="tags"></ul>
+			<span class="overflow_mask"></span>
+		</div>
+		
+		<ul class="task-actions">
+			<li class="move first"><a title="Drag to Move">Move</a></li>
+			<li class="edit"><a title="Edit">Edit</a></li>
+			<li class="delete"><a title="Delete">Delete</a></li>
+			<li class="flag last"><a title="Flag">Flag</a></li>
+		</ul>
+	</li>
+</div>
+
+
+<!-- ########### Popovers ########## -->
+<div id="searchPopover" class="hide pop-out-wrap quicksearch pop-out-list" style="position: absolute; overflow: visible; top: 46px; left: 815px;">
+	<div class="pop-out">
+		<div class="pop-out-body">
+			<div class="pop-out-header">
+				<button class="left cancel" type="button" style="display: block;">Cancel</button>
+				<h2 class="title">Quick Search</h2>
+				<button class="button right hide" type="button" style=""></button>
+			</div>
+		<div class="pop-out-content">
+			<ul class="fancy-list">
+				<li class="disabled item"><span>No Results for "fa"</span></li>
+				<li class="item"><span><b>Tweets:</b> Sound when new Tweets coming</span></li>
+				<li class="item"><span><b>Tweets:</b> Sound when new Tweets coming</span></li>
+				<li class="item"><span><b>Tweets:</b> Sound when new Tweets coming</span></li>
+			</ul>
+		</div>
+		<div class="pop-out-footer">
+			<a class="button">
+				<div><span>View all tasks (includes all completed)…</span></div>
+			</a>
+		</div>
+	</div>
+</div>
+<div class="pop-out-tail" style="position: absolute; background: url(/assets/images/new-task-form-tail-up.png) no-repeat scroll 0pt 100% transparent; width: 23px; height: 14px; top: -13px; left: 184px;"></div>
+</div>
+
+
+<div id="taskPopover" class="hide pop-out-wrap new-task-popout visible collapsed" style="position: absolute; overflow: visible; top: 46px; left: 84px; width: 300px;">
+	<div class="pop-out">
+		<div class="pop-out-body">
+			<div class="pop-out-header">
+				<button class="left cancel" type="button">Cancel</button>
+				<h2 class="title">New Task</h2>
+				<button class="button right default disabled" type="button" disabled="">Save</button>
+			</div>
+			<div class="pop-out-content">
+				<form id="taskForm">
+					<ul>
+						<li class="meta task-body first">
+							<input id="newTaskTitle" type="text" class="body user-input-field" alt="Task title..." maxlength="140" />
+						    <span class="clear-this" style="display: block;"></span>
+						</li>
+						<li class="meta task-project first">
+							<input id="newTaskProject" type="text" class="body user-input-field" alt="Project..." maxlength="140" />
+						    <span class="clear-this" style="display: block;"></span>
+						</li>
+						<li class="meta task-tags">
+							<input id="newTaskTags" type="text" class="body user-input-field" alt="Tags..." maxlength="140" />
+						    <span class="clear-this" style="display: block;"></span>
+						</li>
+						<li class="meta task-notes">
+							<textarea id="newTaskNotes" class="task-notes toggle user-input-field" alt="Describe..." type="text" style="overflow: hidden;"></textarea>
+						    <span class="clear-this" style="display: block;"></span>
+						</li>
+					</ul>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="pop-out-tail" style="position: absolute; background: url(/assets/images/new-task-form-tail-up.png) no-repeat scroll 0pt 100% transparent; width: 23px; height: 14px; top: -13px; left: 139px;"></div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/mootools/1.3.0/mootools-yui-compressed.js"></script>
+<script src="/assets/js/more.js"></script>
+<script src="/assets/js/SortableList.js"></script>
+<script src="/assets/js/TinyAlert.js"></script>
+<script src="/assets/js/Impromptu.js"></script>
+<script src="/assets/js/DynamicTextarea.js"></script>
+<script src="/assets/js/Autocompleter.js"></script>
+<script src="/assets/js/MooScroll.js"></script>
+
+<script src="/assets/js/RPC.js"></script>
+<script src="/assets/js/Main.js"></script>
+<script src="/assets/js/Projects.js"></script>
+<script src="/assets/js/Tasks.js"></script>
+<script src="/assets/js/Tags.js"></script>
+<script src="/assets/js/Pop.js"></script>
+<script src="/assets/js/Prompts.js"></script>
+
+</body>
+</html>
