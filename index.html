@@ -69,20 +69,39 @@
 
 
 <div id="main">
-	<div>
-		<div class="task-lists">
-			<h3 class="project hide" style="">
-				<a class="back">
-					<ins class="hide"></ins><span class="title"></span>
-				</a>
-				<a id="showCompletedLink" class="completed right">
-					<ins></ins>show completed
-				</a>
-			</h3>
+
+	<div id="mooLayoutContent" class="scrollBarWrap">
 		
-			<ul class="taskList"></ul>
-		</div>
+	    <div class="mooLayoutWindow mooLayoutTop scrollBarWrap">
+		
+			<div>
+				<div class="task-lists">
+					<h3 class="project hide" style="">
+						<a class="back">
+							<ins class="hide"></ins><span class="title"></span>
+						</a>
+						<a id="showCompletedLink" class="completed right">
+							<ins></ins>show completed
+						</a>
+					</h3>
+					
+					<div class="scrollBar" style="display: block: background-color: yellow; width: 15px;">
+						<div class="scrollHandle" style="visibility: visible"></div>
+					</div>
+					
+					<div id="taskListWrapper" style="overflow: hidden;">
+						<ul id="taskList" class="taskList"></ul>
+					</div>
+				</div>
+			</div>    	
+	
+	    </div>
+
+	    <div id="mooLayoutHandle"></div>
+
+	    <div class="mooLayoutWindow mooLayoutBottom"></div>
 	</div>
+
 </div>
 
 

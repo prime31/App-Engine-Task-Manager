@@ -4,7 +4,7 @@
 }
 
 .task-lists {
-  -moz-box-shadow: 0 2px 0 #C4CDD6;
+  /*-moz-box-shadow: 0 2px 0 #C4CDD6;*/
   position: relative;
 }
 
@@ -58,15 +58,12 @@ h3.project .back:hover ins, h3.project .completed:hover ins {
 	background-position: 0 -13px;
 }
 
-.task:first-child { border-top: medium none; }
-
 .task {
 	background: none repeat scroll 0 0 #FFFFFF;
-	border-top: 1px solid #ECECEC;
+	border-bottom: 1px solid #ECECEC;
 	color: #444444;
 	font-size: 12px;
 	height: 37px;
-	padding: 0;
 	position: relative;
 }
 
@@ -97,7 +94,7 @@ h3.project .back:hover ins, h3.project .completed:hover ins {
 	background: none repeat scroll 0 0 #FFFFFF;
 	display: block;
 	position: absolute;
-	right: 0;
+	right: 10px;
 	top: 0;
 }
 
@@ -166,7 +163,7 @@ h3.project .back:hover ins, h3.project .completed:hover ins {
 	display: none;
 	height: 23px;
 	position: absolute;
-	right: 4px;
+	right: 14px;
 	top: 6px;
 }
 

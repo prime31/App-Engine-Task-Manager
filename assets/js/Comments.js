@@ -41,6 +41,7 @@ main.comments = {
 		var dim = $( 'main' ).getCoordinates();
 		var winSize = window.getSize();
 
+		/*
 		main.comments.view = new Element( 'div',
 		{
 		    styles: {
@@ -50,6 +51,16 @@ main.comments = {
 		        left: dim.left,
 		        width: dim.width,
 		        height: winSize.y - dim.top - 23, // window - top - grey header bar
+		        backgroundColor: '#fff',
+				overflowY: 'auto'
+		    }
+		});
+		*/
+		
+		main.comments.view = new Element( 'div',
+		{
+		    styles: {
+		        height: '100%',
 		        backgroundColor: '#fff',
 				overflowY: 'auto'
 		    }
@@ -141,7 +152,8 @@ main.comments = {
 		
 		// injection!
 		template.inject( main.comments.view );
-		main.comments.view.inject( document.body );
+		main.comments.view.inject( $( 'main' ).getElement( 'div.mooLayoutBottom' ) );
+		//main.comments.view.inject( document.body );
 		
 		main.comments.view.scrollTo( 0, 0 );
 		

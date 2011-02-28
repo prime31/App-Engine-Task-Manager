@@ -19,6 +19,7 @@ var MooScroll = new Class
 			{
 				// Scrolls the content element in x or y direction.
 				var y = step;
+
 				this.content.scrollTo( 0, y );
 			}.bind( this )
 		}).set( 0 );
@@ -42,7 +43,7 @@ var MooScroll = new Class
 	// this should be called whenever the content changes
 	update: function()
 	{
-		var scrollSize = this.content.getFirst().getScrollSize().y;
+		var scrollSize = this.content.getFirst().getScrollSize().y + 20;
 		var contentHeight = this.content.getComputedSize().height;
 		
 		// hide the scroll bar if we dont need it
@@ -58,7 +59,7 @@ var MooScroll = new Class
 		// size the bar properly
 		this.bar.setStyle( 'height', contentHeight );
 		
-		var steps = scrollSize - contentHeight;
+		var steps = scrollSize - contentHeight + handleHeight;
 		this.construct( steps );
 	}
 });

@@ -1,0 +1,40 @@
+
+#mooLayoutContent {
+    position: relative;
+    width: 100%;
+    margin: 6px auto;
+}
+
+#mooLayoutContent .mooLayoutWindow {
+    width: 100%;
+    border: 1px solid #adadad !important;
+}
+
+    #mooLayoutContent #mooLayoutHandle {
+        width: 100%;
+        height: 8px;
+        padding: 0 1px;
+        cursor: row-resize;
+        position: absolute;
+        top: 0;
+        left: 0;
+		margin-left: -1px;
+        background: #E2E9F1 url( /assets/images/mooLayoutHandle.png ) 50% 3px no-repeat;
+    }
+
+    #mooLayoutContent .mooLayoutTop {
+        height: 25%;
+        position: absolute;
+        top: -6px;
+		margin-bottom: 6px;
+		overflow-y: hidden;
+		background-color: #fff;
+    }
+
+    #mooLayoutContent .mooLayoutBottom {
+        height: 75%;
+        position: absolute;
+        bottom: -6px;
+        overflow: auto;
+		margin-top: 6px;
+    }
