@@ -48,6 +48,8 @@
 			font-size: 12px;
 			cursor: pointer !important;
 			line-height: 25px;
+			text-shadow: 0 1px 1px #ddd;
+			font-family: Helvetica;
 		}
 		
 		ul.projectList li.selected {

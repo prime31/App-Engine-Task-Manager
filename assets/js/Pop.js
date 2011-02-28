@@ -60,9 +60,6 @@ main.pop = {
 		{
 			evt.stop();
 			
-			main.pop.resetNewTaskForm();
-			$( 'taskPopover' ).removeClass( 'hide' );
-			
 			if( !main.pop.newTaskOvertextSetup )
 			{
 				// setup overtext
@@ -72,6 +69,9 @@ main.pop = {
 				});
 				main.pop.newTaskOvertextSetup = true;
 			}
+			
+			$( 'taskPopover' ).removeClass( 'hide' );
+			main.pop.resetNewTaskForm();
 		});
 		
 		// new task popover events
@@ -95,7 +95,7 @@ main.pop = {
 		// cancel button
 		$( 'taskPopover' ).getElement( 'button.cancel' ).addEvent( 'click', function( evt )
 		{
-			$( 'taskPopover' ).addClass( 'hide' );
+			main.pop.resetNewTaskForm( true );
 		});
 		
 		// save button
@@ -117,6 +117,7 @@ main.pop = {
 		this.tagAutocompleter = new Autocompleter.Local( 'newTaskTags', [],
 		{
 			minLength: 1,
+			markQuery: false,
 			selectMode: 'type-ahead',
 			multiple: true,
 			maxChoices: 5,
@@ -128,24 +129,34 @@ main.pop = {
 		this.projectAutocompleter = new Autocompleter.Local( 'newTaskProject', [],
 		{
 			minLength: 1,
+			markQuery: false,
 			selectMode: 'type-ahead',
 			maxChoices: 5,
 			zIndex: 1000,
 			filterSubset: true
 		});
-
 	},
 	
 	validateNewTask: function()
 	{
 		if( $( 'newTaskTitle' ).value.length && $( 'newTaskProject' ).value.length )
+		{
 			$( 'taskPopover' ).getElement( 'button.right' ).removeProperty( 'disabled' ).removeClass( 'disabled' );
+			return true;
+		}
 		else
+		{
 			$( 'taskPopover' ).getElement( 'button.right' ).setProperty( 'disabled', '' ).addClass( 'disabled' );
+		}
+		
+		return false;
 	},
 	
 	onClickSaveTask: function()
 	{
+		if( !main.pop.validateNewTask() )
+			return;
+		
 		var title = $( 'newTaskTitle' ).value.trim();
 		var projectName = $( 'newTaskProject' ).value.trim();
 		var tags = $( 'newTaskTags' ).value.trim().split( ',' ).invoke( 'trim' ).filter( function( i ) { return i.length; } );
@@ -182,19 +193,24 @@ main.pop = {
 			});
 		}
 		
-		main.pop.resetNewTaskForm();
+		main.pop.resetNewTaskForm( true );
 	},
 	
-	resetNewTaskForm: function()
+	resetNewTaskForm: function( shouldHide )
 	{
-		$( 'taskPopover' ).addClass( 'hide' );
 		$( 'taskForm' ).reset();
 		
 		$$( '#taskPopover input, #taskPopover textarea' ).retrieve( 'OverText' ).each( function( item )
 		{
 		    if( item != null )
 		        item.show();
-		})
+		});
+		
+		// clean up the state of the save button
+		main.pop.validateNewTask();
+		
+		if( shouldHide )
+			$( 'taskPopover' ).addClass( 'hide' );
 	}
 
 }

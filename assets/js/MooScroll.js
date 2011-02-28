@@ -27,7 +27,7 @@ var MooScroll = new Class
 		$$( this.content, this.bar ).addEvent( 'mousewheel', function( e )
 		{
 			e.stop();
-			var step = this.slider.step - e.wheel * 10;
+			var step = this.slider.step - e.wheel * 20;
 			
 			// clamp the step
 			step = Math.max( 0, Math.min( this.slider.steps, step ) );

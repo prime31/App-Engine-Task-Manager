@@ -583,7 +583,7 @@ Comment.remove = function( projectId, taskId, commentId )
 	
 	var jsonRequest = new Request.JSON
 	({
-		url: '/comments/add',
+		url: '/comments/remove',
 		onSuccess: function( res )
 		{
 			if( !res.result )

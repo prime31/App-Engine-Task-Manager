@@ -62,16 +62,24 @@ main.comments = {
 		
 		// description
 		if( task.description.length )
-			template.getElement( '.task-notes > p' ).set( 'html', task.description );
+			template.getElement( '.task-notes > p' ).set( 'html', task.description.replace( /\n/g, '<br />' ) );
 		else
 			template.getElement( '.task-notes' ).destroy();
 		
 		var tagsList = template.getElement( 'ul.task-tags-list' );
-		task.tags.each( function( tag )
+		
+		if( tagsList.length > 0 )
 		{
-			var li = Elements.from( '<li class="tag"><a href="#">' + tag + '</a></li>' );
-			li[0].inject( tagsList );
-		});
+			task.tags.each( function( tag )
+			{
+				var li = Elements.from( '<li class="tag"><a href="#">' + tag + '</a></li>' );
+				li[0].inject( tagsList );
+			});
+		}
+		else
+		{
+			tagsList.destroy();
+		}
 		
 		// listen for tag clicks
 		tagsList.addEvent( 'click:relay(li)', function( evt, ele )
@@ -89,11 +97,46 @@ main.comments = {
 		var commentsList = template.getElement( 'ul.activities-list' );
 		task.comments.each( function( c )
 		{
-			var commentTemplate = document.id( 'commentTemplate' ).getChildren()[0].clone();
-			commentTemplate.getElement( 'div.header' ).set( 'html', c.created );
-			commentTemplate.getElement( 'div.content' ).set( 'html', c.text );
+			main.comments.injectComment( c, commentsList );
+		});
+		
+		// listen for remove button clicks on the comments
+		commentsList.addEvent( 'click:relay(li a.remove)', function( evt, ele )
+		{
+			evt.stop();
 			
-			commentTemplate.inject( commentsList );
+			var li = ele.getParent( 'li' );
+			var commentId = li.getAttribute( 'data-id' );
+			
+			$prompt.show( 'Are you sure you want to remove this comment?',
+			{
+				buttons: { Cancel: false, Remove: true,  },
+				callback: function( v, m, f )
+				{
+					if( v )
+					{
+						Comment.remove( main.comments.projectId, main.comments.taskId, commentId );
+						li.destroy();
+					}
+					return true;
+				}
+			});
+		});
+		
+		// listen to click events on the submit button
+		template.getElement( 'a.submit' ).addEvent( 'click', function( evt )
+		{
+			var comment = main.comments.view.getElement( 'textarea.body' ).value;
+			if( comment.length == 0 )
+				return;
+
+			// add the comment
+			Comment.add( main.comments.projectId, main.comments.taskId, comment, function( c )
+			{
+				// inject the new comment and wipe out the textarea
+				main.comments.injectComment( c, commentsList, true );
+				main.comments.view.getElement( 'textarea.body' ).value = '';
+			});
 		});
 		
 		// injection!
@@ -101,14 +144,28 @@ main.comments = {
 		main.comments.view.inject( document.body );
 		
 		main.comments.view.scrollTo( 0, 0 );
+		
+		// setup the textbox expander
+		new DynamicTextarea( template.getElement( 'textarea.body' ) );
 	},
 	
-	addComment: function( text )
+	injectComment: function( comment, list, highlight )
 	{
-		Comment.add( projectId, taskId, text, function( comment )
-		{
-		    console.log( comment )
-		});	
+		// if list is null, just grab the current list
+		if( typeOf( list ) != 'element' )
+			main.comments.view.list = getElement( 'ul.activities-list' );
+		
+		var commentTemplate = document.id( 'commentTemplate' ).getChildren()[0].clone();
+		commentTemplate.getElement( 'div.header' ).set( 'html', comment.created );
+		commentTemplate.getElement( 'div.content' ).set( 'html', comment.text.replace( /\n/g, '<br />' ) );
+		
+		// set the id for later use
+		commentTemplate.setAttribute( 'data-id', comment.id );
+		
+		commentTemplate.inject( list );
+		
+		if( highlight )
+			commentTemplate.highlight();
 	}
 	
 };

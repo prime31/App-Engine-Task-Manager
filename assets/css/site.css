@@ -12,6 +12,14 @@
 	user-select: none;
 }
 
+:focus {
+    outline: none;
+}
+
+textarea {
+    resize: none;
+}
+
 /* global */
 body {
 	color: #5C5C5C;
@@ -42,15 +50,23 @@ label.overTxtLabel {
 
 
 /* fake scroll bars */
+.scrollBarWrap:hover .scrollHandle {
+	visibility: visible;
+}
+
 div.scrollBar {
+	background-color: rgba( 255, 255, 255, 0.3 );
 	position: absolute;
 	right: 0px;
 	height: 100%;
 	width: 5px;
+	z-index: 2;
+	margin-left: 5px;
 }
 
 div.scrollHandle {
 	position: relative;
+	visibility: hidden;
 	background-color: rgba( 0, 0, 0, 0.5 );
 	height: 20px;
 	-webkit-border-radius: 4px;

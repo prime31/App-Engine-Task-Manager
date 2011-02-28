@@ -3,8 +3,15 @@
 }
 
 .pop-out-wrap {
-	-moz-border-radius: 6px 6px 6px 6px;
-	-moz-box-shadow: 0 0 1px #F0F0F0 inset, 0 3px 15px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow:inset 0 0 1px #f0f0f0,0px 3px 15px rgba(0,0,0,0.5);
+	-webkit-box-shadow:inset 0 0 1px #f0f0f0,0px 3px 15px rgba(0,0,0,0.5);
+	box-shadow:inset 0 0 1px #f0f0f0,0px 3px 15px rgba(0,0,0,0.5);
+	-webkit-border-radius:6px;
+	-moz-border-radius:6px;
+	border-radius:6px;
+	-moz-background-clip:padding-box;
+	-webkit-background-clip:padding-box;
+	background-clip:padding-box;
 	background: none repeat scroll 0 0 #FFFFFF;
 	border: 1px solid black;
 	z-index: 1000;
@@ -14,7 +21,12 @@
 	-moz-box-shadow: 0 1px 0 #777777 inset;
 	-moz-user-select: none;
 	background-image: -moz-linear-gradient(center top , #575757 0pt, #333333 50%, #272727 50%, #232323 100%);
+	background-image:-webkit-gradient(linear,0% 0,0% 100%,color-stop(0%,#575757),color-stop(50%,#333),color-stop(50%,#272727),color-stop(100%,#232323));
 	border-bottom: 1px solid #000000;
+	border-radius: 5px 5px 0 0;
+	-moz-box-shadow:0 1px 0 #777 inset;
+	-webkit-box-shadow:0 1px 0 #777 inset;
+	box-shadow:0 1px 0 #777 inset;
 	height: 30px;
 	left: 0;
 	position: relative;
@@ -24,9 +36,16 @@
 }
 
 .pop-out-header button {
-	-moz-border-radius: 4px 4px 4px 4px;
-	-moz-box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2) inset, 0 1px 1px #333333;
 	border: 1px solid #000000;
+	border-radius:4px;
+	-webkit-border-radius:4px;
+	-moz-border-radius:4px;
+	-webkit-box-shadow:inset 0 1px 1px rgba(255,255,255,0.2),0px 1px 1px #333;
+	-moz-box-shadow:inset 0 1px 1px rgba(255,255,255,0.2),0px 1px 1px #333;
+	box-shadow:inset 0 1px 1px rgba(255,255,255,0.2),0px 1px 1px #333;
+	-webkit-background-clip:padding-box;
+	-moz-background-clip:padding-box;
+	background-clip:padding-box;
 	color: #FFFFFF;
 	display: block;
 	font-family: "helvetica neue",helvetica,Arial,sans-serif;
@@ -44,9 +63,23 @@
 
 .pop-out-header button.cancel {
 	background-image: -moz-linear-gradient(center top , #505050 0pt, #333333 50%, #272727 50%, #111111 100%);
+	background-image:-webkit-gradient(linear,0% 0,0% 100%,color-stop(0%,#505050),color-stop(50%,#333),color-stop(50%,#272727),color-stop(100%,#111));
 	float: left;
 	text-shadow: 0 1px 1px #000000;
 	cursor: pointer !important;
+}
+
+.pop-out-header button.cancel:hover {
+	background-image:-moz-linear-gradient(top,#5c5c5c 0,#333 50%,#272727 50%,#111 100%);
+	background-image:-webkit-gradient(linear,0% 0,0% 100%,color-stop(0%,#5c5c5c),color-stop(50%,#333),color-stop(50%,#272727),color-stop(100%,#111));
+}
+
+.pop-out-header button.cancel:active {
+	background-image:-moz-linear-gradient(top,#111 0,#333 100%);
+	background-image:-webkit-gradient(linear,0% 0,0% 100%,color-stop(0%,#111),color-stop(100%,#333));
+	-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,0.2),0px 1px 1px #333;
+	-moz-box-shadow:inset 0 1px 1px rgba(0,0,0,0.2),0px 1px 1px #333;
+	box-shadow:inset 0 1px 1px rgba(0,0,0,0.2),0px 1px 1px #333;
 }
 
 .pop-out-header h2 {
@@ -113,16 +146,47 @@
 }
 
 .button.default.disabled, .button.default.disabled:hover {
-  -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset !important;
-	background-image: -moz-linear-gradient(center top , #6BBEFF 0pt, #2C8FFF 50%, #1471FB 50%, #0758F1 100%) !important;
-	color: #1447A1 !important;
-	text-shadow: 0 1px 0 #288EFF !important;
+	background-image:-moz-linear-gradient(center top,#6BBEFF 0,#2C8FFF 50%,#1471FB 50%,#0758F1 100%)!important;
+	background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#6BBEFF),color-stop(0.5,#2C8FFF),color-stop(0.5,#1471FB),color-stop(1,#0758F1))!important;
+	background-image:-webkit-linear-gradient(top,#6BBEFF 0,#2C8FFF 50%,#1471FB 50%,#0758F1 100%)!important;
+	background-image:linear-gradient(top,#6BBEFF 0,#2C8FFF 50%,#1471FB 50%,#0758F1 100%)!important;
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorStr='#6BBEFF',EndColorStr='#0758F1');
+	-moz-box-shadow:inset 0 1px 0 rgba(255,255,255,0.3)!important;
+	-webkit-box-shadow:inset 0 1px 0 rgba(255,255,255,0.3)!important;
+	box-shadow:inset 0 1px 0 rgba(255,255,255,0.3)!important;
+	border-color:#2b4887!important;
+	border-bottom-color:#1447a1!important;
+	color:#1447a1!important;
+	text-shadow:#288eff 0 1px 0!important;
 }
 
 .button.default {
-	background-image: -moz-linear-gradient(center top , #6BBEFF 0pt, #2C8FFF 50%, #1471FB 50%, #0758F1 100%);
-	color: #FFFFFF;
-	text-shadow: 0 1px 0 #2B4887;
+	border-color:#2b4887;
+	border-bottom-color:#1447a1;
+	background-image:-moz-linear-gradient(center top,#6BBEFF 0,#2C8FFF 50%,#1471FB 50%,#0758F1 100%);
+	background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#6BBEFF),color-stop(0.5,#2C8FFF),color-stop(0.5,#1471FB),color-stop(1,#0758F1));
+	background-image:-webkit-linear-gradient(top,#6BBEFF 0,#2C8FFF 50%,#1471FB 50%,#0758F1 100%);
+	background-image:linear-gradient(top,#6BBEFF 0,#2C8FFF 50%,#1471FB 50%,#0758F1 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorStr='#6BBEFF',EndColorStr='#0758F1');
+	color:#fff;
+	text-shadow:#2b4887 0 1px 0;
+}
+
+.button.default:hover {
+	background-image:-moz-linear-gradient(center top,#8ccdff 0,#2C8FFF 50%,#1471FB 50%,#0758F1 100%);
+	background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#8ccdff),color-stop(0.5,#2C8FFF),color-stop(0.5,#1471FB),color-stop(1,#0758F1));
+	background-image:-webkit-linear-gradient(top,#8ccdff 0,#2C8FFF 50%,#1471FB 50%,#0758F1 100%);
+	background-image:linear-gradient(top,#8ccdff 0,#2C8FFF 50%,#1471FB 50%,#0758F1 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorStr='#8ccdff',EndColorStr='#0758F1');
+}
+
+.button.default.depressed,.button.default:active {
+	border-top-color:#1a2b51;
+	background-image:-moz-linear-gradient(center top,#0057f0 0,#2C8FFF 100%);
+	background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#0057f0),color-stop(1,#2C8FFF));
+	background-image:-webkit-linear-gradient(top,#0057f0 0,#2C8FFF 100%);
+	background-image:linear-gradient(top,#0057f0 0,#2C8FFF 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorStr='#0057f0',EndColorStr='#2C8FFF');
 }
 
 .button.disabled {

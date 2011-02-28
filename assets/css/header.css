@@ -21,6 +21,7 @@
 
 #header a:hover {
 	background-image: -moz-radial-gradient( 50% 49px 0deg, circle farthest-side, rgba( 23, 181, 236, 0.75 ) 0pt, rgba( 23, 181, 236, 0 ) 58% );
+	background-image:-webkit-gradient(radial,25 50,30,25 50,0,from(rgba(23,181,236,0)),to(rgba(23,181,236,0.75)));
 }
 
 #header .newTask:hover .icon {
