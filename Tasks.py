@@ -48,19 +48,27 @@ class GetAllCompletedTasks( webapp.RequestHandler ):
 class GetTask( webapp.RequestHandler ):
 	@login_required
 	def get( self ):
-		result = {}
+		result = {
+			'result': True,
+			'error': ''
+		}
 
 		# input marshalling
 		taskId = int( self.request.get( 'taskId' ) )
 		projectId = int( self.request.get( 'projectId' ) )
 		
-		# grab the task
-		task = Task.get_by_id( taskId, Key.from_path( 'Project', projectId ) )
-		result['task'] = task.toDict()
+		try:
+			# grab the task
+			task = Task.get_by_id( taskId, Key.from_path( 'Project', projectId ) )
+			result['task'] = task.toDict()
 
-		# add the comments and images
-		result['comments'] = [c.toDict() for c in task.comments]
-		result['images'] = [i.toDict() for i in task.images]
+			# add the comments and images
+			result['comments'] = [c.toDict() for c in task.comments]
+			result['images'] = [i.toDict() for i in task.images]
+			
+		except Exception, e:
+			result['result'] = False
+			result['error'] = 'Error: %s' % e
 		
 		#self.response.headers['Content-Type'] = 'application/json'
 		self.response.out.write( simplejson.dumps( result ) )

@@ -15,6 +15,7 @@ var Main = new Class({
 		main.tags.init();
 		main.tasks.init();
 		main.pop.init();
+		main.comments.init();
 		
 		// load some projects and tags
 		Project.loadProjects( this.projectsLoaded, this.projectLoadFailed );
@@ -30,10 +31,12 @@ var Main = new Class({
 		var winSize = window.getSize();
 		$( 'main' ).setStyle( 'width', winSize.x - 211 );
 		
+		// update the tagList
 		var tagList = $( 'tagListWrapper' );
 		var newHeight = winSize.y - tagList.getCoordinates().top - 30 + 10; // bottom toolbar(30), ul padding(10)
 		tagList.setStyle( 'height', newHeight );
 		
+		// the whole west column needs an update
 		$( 'west' ).setStyle( 'height', winSize.y - 42 );
 		
 		// update scrollers

@@ -232,6 +232,7 @@ class Image( db.Model ):
 		task = self.parent()
 		dict = {
 			'filename': self.filename,
+			'id': self.key().id(),
 			'url': '/images/get/%s/%s/%s' % ( task.parent().key().id(), task.key().id(), self.key().id() )
 		}
 		return dict

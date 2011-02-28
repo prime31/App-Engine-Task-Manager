@@ -170,6 +170,8 @@ Task.prototype = {
 	completed: null,
 	projectName: null,
 	tags: null,
+	comments: [],
+	images: [],
 	
 	fromJson: function( json )
 	{
@@ -181,6 +183,7 @@ Task.prototype = {
 		
 		return this;
 	}
+
 };
 
 Task.getTasksForProjectIdOrTag = function( projectIdOrTag, complete, failed )
@@ -214,6 +217,53 @@ Task.getTasksForProjectIdOrTag = function( projectIdOrTag, complete, failed )
 };
 
 
+Task.getTask = function( taskId, projectId, complete )
+{
+	// we need the taskId and projectId to get a task
+	var params = { projectId: projectId, taskId: taskId };
+	
+	var jsonRequest = new Request.JSON
+	({
+		url: '/tasks/get',
+		noCache: true,
+		onSuccess: function( res )
+		{
+			if( !res.result )
+			{
+				alert( res.error );
+				return;
+			}
+
+			// convert our tasks
+			var task = new Task().fromJson( res.task );
+			
+			// convert the comments
+			res.comments.each( function( item )
+			{
+				var c = new Comment().fromJson( item );
+				task.comments.push( c );
+			});
+			
+			// convert the images
+			res.images.each( function( item )
+			{
+				var i = new Image().fromJson( item );
+				task.images.push( i );
+			});
+			complete( task );
+			
+			main.alert( 'Tasks retrieved' );
+		},
+		onFailure: function( xhr )
+		{
+			alert( 'Get task failed' );
+		}
+	}).get( params );
+	
+	return jsonRequest;
+};
+
+
 Task.getAllCompleted = function( complete, failed )
 {
 	var jsonRequest = new Request.JSON
@@ -232,7 +282,7 @@ Task.getAllCompleted = function( complete, failed )
 			});
 			complete( tasks );
 			
-			main.alert( 'Tasks retrieved' );
+			main.alert( 'Task retrieved' );
 		},
 		onFailure: failed
 	}).get();
@@ -478,4 +528,90 @@ Tags.remove = function( tag )
 	}).post( params );
 	
 	return jsonRequest;
+};
+
+
+
+// ########### Comments #############
+function Comment(){ return this; }
+Comment.prototype = {
+	id: null,
+	text: null,
+	parent: null,
+	created: null,
+	
+	fromJson: function( json )
+	{
+		Object.merge( this, json );
+		return this;
+	}
+
+};
+
+// complete gets passed the new comment
+Comment.add = function( projectId, taskId, comment, complete )
+{
+	var params = { projectId: projectId, taskId: taskId, comment: comment };
+	
+	var jsonRequest = new Request.JSON
+	({
+		url: '/comments/add',
+		onSuccess: function( res )
+		{
+			if( !res.result )
+			{
+				alert( res.error );
+			}
+			else
+			{
+				complete( new Comment().fromJson( res.data ) );
+				main.alert( 'Comment added' );
+			}
+		},
+		onFailure: function( xhr )
+		{
+			alert( 'Setting tag sort order failed' );
+		}
+	}).post( params );
+	
+	return jsonRequest;
+};
+
+Comment.remove = function( projectId, taskId, commentId )
+{
+	var params = { projectId: projectId, taskId: taskId, commentId: commentId };
+	
+	var jsonRequest = new Request.JSON
+	({
+		url: '/comments/add',
+		onSuccess: function( res )
+		{
+			if( !res.result )
+				alert( res.error );
+			else
+				main.alert( 'Comment removed' );
+		},
+		onFailure: function( xhr )
+		{
+			alert( 'Failed to remove comment' );
+		}
+	}).post( params );
+	
+	return jsonRequest;
+};
+
+
+// ########### Images #############
+function Image(){ return this; }
+Image.prototype = {
+	id: null,
+	url: null,
+	filename: null,
+	
+	fromJson: function( json )
+	{
+		Object.merge( this, json );
+		return this;
+	}
+
 };

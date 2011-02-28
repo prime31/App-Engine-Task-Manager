@@ -23,6 +23,17 @@ main.tasks = {
 		// listen for clicks on the list right action buttons
 		this.ele.addEvent( 'click:relay(ul.task-actions li a)', this.onClickActionButton );
 		
+		// listen for clicks on the actual tasks
+		this.ele.addEvent( 'click:relay(a.newTask)', function( evt, ele )
+		{
+			evt.stop();
+			
+			// grab the task and show the comments screen
+			var taskId = parseInt( ele.getParent( 'li[data-id]' ).getAttribute( 'data-id' ) );
+			var task = main.tasks.getTaskForTaskId( taskId );
+			main.comments.showTaskDetails( taskId, task.parent );
+		});
+		
 		// listen to checkbox changes
 		this.ele.addEvent( 'click:relay(ul.taskList input[type=checkbox])', this.onClickCheckbox );
 		
@@ -30,6 +41,9 @@ main.tasks = {
 		$( 'showCompletedLink' ).addEvent( 'click', function( evt )
 		{
 			evt.stop();
+			
+			// clear out our comments if we are showing them
+			main.comments.hideTaskDetails();
 			
 			main.deselectProjectAndTag();
 			main.tasks.clearTasks();
