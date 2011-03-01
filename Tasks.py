@@ -137,7 +137,7 @@ class ReorderTasks( webapp.RequestHandler ):
 			project = Project.get_by_id( projectId )
 			
 			# we need the list to have the same number eles as we have tasks
-			if len( orderList ) != project.tasks.count( 1000 ):
+			if len( orderList ) != len( Task.AllTasksForProject( project ) ):
 				raise Exception( 'order must have the same number of elements as there are tasks in the project!' )
 
 			db.run_in_transaction( self.reorder, orderList, project )

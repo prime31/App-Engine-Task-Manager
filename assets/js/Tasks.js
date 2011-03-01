@@ -4,6 +4,7 @@ main.tasks = {
 	taskTitle: null,
 	taskTitleWrapper: null,
 	currentProjectIdOrTag: null,
+	spinner: null,
 	
 	init: function()
 	{
@@ -12,10 +13,11 @@ main.tasks = {
 		this.taskTitle = document.id( 'main' ).getElement( 'span.title' );
 		
 		this.ele = $( document.body ).getElement( 'ul.taskList' );
-	
+
 		// make the task list sortable	
 		this.list = new SortableList( this.ele );
 		this.list.addEvent( 'onSortOrderChanged', this.onTaskSortChanged );
+		main.tasks.list.detach();
 		
 		// listen for clicks on the list tag buttons
 		this.ele.addEvent( 'click:relay(ul.tags li a)', this.onClickTag );
@@ -52,12 +54,13 @@ main.tasks = {
 		
 		// listen to changes to tags and projects
 		main.addEvent( 'selectedTagChanged', main.tasks.onTagChanged );
-		
 		main.addEvent( 'selectedProjectChanged', main.tasks.onProjectChanged );
 	},
 	
 	loadTasksForProjectIdOrTag: function( projectIdOrTag )
 	{
+		main.tasks.list.detach();
+		main.tasks.showSpinner( true );
 		main.tasks.currentProjectIdOrTag = projectIdOrTag
 		
 		// cancel any currently running request
@@ -68,6 +71,9 @@ main.tasks = {
 	
 	loadAllCompletedTasks: function()
 	{
+		main.tasks.list.detach();
+		main.tasks.showSpinner( true );
+		
 		// hide the 'show completed' link
 		$( 'showCompletedLink' ).addClass( 'hide' );
 		main.tasks.setTitle( 'Completed Tasks' );
@@ -83,19 +89,28 @@ main.tasks = {
 	// request event handlers
 	tasksLoaded: function( tasks )
 	{
+		main.tasks.showSpinner( false );
 		main.tasks.request = null;
 		main.tasks.addTasks( tasks );
 	},
 	
 	taskLoadFailed: function( xhr )
 	{
+		main.tasks.showSpinner( false );
 		main.tasks.request = null;
 		alert( 'Task load failed' );
 	},
 	
-	onTasksLoaded: function( tasks )
+	showSpinner: function( shouldShow )
 	{
-		main.tasks.addTasks( tasks );
+		// lazily create the spinner
+		if( main.tasks.spinner == null )
+			main.tasks.spinner = new Spinner( 'taskListWrapper', { hideOnClick: true, maskMargins: true, fxOptions: { duration: 0.1 } } );
+		
+		if( shouldShow )
+			main.tasks.spinner.show();
+		else
+			main.tasks.spinner.hide();
 	},
 	
 	// list events

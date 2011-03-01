@@ -35,7 +35,8 @@
 	}
 	
 	#tagListWrapper {
-		overflow: hidden;
+		overflow-y: auto;
+		overflow-x: hidden;
 	}
 
 		ul.projectList li {

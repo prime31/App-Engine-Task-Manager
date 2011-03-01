@@ -4,7 +4,6 @@ main.tags = {
 		tagsUpdated( tags )
 	*/
 	items: [],
-	scrollBar: null,
 	
 	init: function()
 	{
@@ -19,13 +18,6 @@ main.tags = {
 		
 		// listen for clicks on the li's
 		this.ele.addEvent( 'click:relay(li)', this.onListItemClicked );	
-		
-		/* setup the scrollbar */
-		var bar = $( 'west' ).getElement( 'div.scrollBar' );
-		var handle = $( 'west' ).getElement( 'div.scrollHandle' );
-		var content = $( 'tagListWrapper' );
-
-		this.scrollBar = new MooScroll( bar, handle, content );
 	},
 	
 	onTagSortChanged: function( ele )
@@ -89,7 +81,6 @@ main.tags = {
 		});
 		
 		// update the scroll bar and fire off the tagsUpdated event
-		main.tags.scrollBar.update();
 		main.fireEvent( 'tagsUpdated', main.tags.items );
 	}
 

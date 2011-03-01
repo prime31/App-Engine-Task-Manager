@@ -8,9 +8,9 @@ var SortableList = new Class
 		/* sortOrderChanged: function( this ) */
 		revert: { duration: 500, transition: 'quad:out' },
 		clone: true,
-		opacity: 0.5,
+		opacity: 0.6,
 		snap: 10,
-		constrain: true,
+		constrain: false,
 		dragOptions: {
 			onBeforeStart: function( ele )
 			{

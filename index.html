@@ -20,6 +20,7 @@
 <link href="/assets/css/Autocompleter.css" media="all" rel="stylesheet" type="text/css" />
 <link href="/assets/css/TaskDetails.css" media="all" rel="stylesheet" type="text/css" />
 <link href="/assets/css/MooLayout.css" media="all" rel="stylesheet" type="text/css" />
+<link href="/assets/css/Spinner.css" media="all" rel="stylesheet" type="text/css" />
 
 
 </head>
@@ -45,12 +46,8 @@
 		<ul id="projectList" class="projectList"></ul>
 	</div>
 	
-	<div class="marginTop30 scrollBarWrap" style="position: relative;">
+	<div class="marginTop30" style="position: relative;">
 		<h3>Tags</h3>
-		
-		<div class="scrollBar">
-			<div class="scrollHandle"></div>
-		</div>
 		
 		<div id="tagListWrapper">
 			<ul id="tagList" class="projectList tagList"></ul>
@@ -70,9 +67,9 @@
 
 <div id="main">
 
-	<div id="mooLayoutContent" class="scrollBarWrap">
+	<div id="mooLayoutContent">
 		
-	    <div class="mooLayoutWindow mooLayoutTop scrollBarWrap">
+	    <div class="mooLayoutWindow mooLayoutTop">
 		
 			<div>
 				<div class="task-lists">
@@ -84,12 +81,8 @@
 							<ins></ins>show completed
 						</a>
 					</h3>
-					
-					<div class="scrollBar" style="display: block: background-color: yellow; width: 15px;">
-						<div class="scrollHandle" style="visibility: visible"></div>
-					</div>
-					
-					<div id="taskListWrapper" style="overflow: hidden;">
+
+					<div id="taskListWrapper">
 						<ul id="taskList" class="taskList"></ul>
 					</div>
 				</div>
@@ -127,8 +120,8 @@
 		</div>
 		
 		<ul class="task-actions">
-			<li class="move first"><a title="Drag to Move">Move</a></li>
-			<li class="edit"><a title="Edit">Edit</a></li>
+			<!--<li class="move first"><a title="Drag to Move">Move</a></li>-->
+			<li class="edit first"><a title="Edit">Edit</a></li>
 			<li class="delete"><a title="Delete">Delete</a></li>
 			<li class="flag last"><a title="Flag">Flag</a></li>
 		</ul>

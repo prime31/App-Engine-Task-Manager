@@ -5,7 +5,6 @@ var Main = new Class({
 	projectSortable: null,
 	tagSortable: null,
 	mooLayout: null,
-	scrollBar: null,
 	
 	init: function()
 	{
@@ -29,14 +28,6 @@ var Main = new Class({
 		
 		this.mooLayout = new MooLayout( 'mooLayoutContent' );
 		this.mooLayout.addEvent( 'resize', this.layoutChanged );
-		
-		/* setup the scrollbar */
-		var bar = $( 'main' ).getElement( 'div.scrollBar' );
-		var handle = $( 'main' ).getElement( 'div.scrollHandle' );
-		var content = $( 'taskListWrapper' );
-
-		this.scrollBar = new MooScroll( bar, handle, content );
-		this.layoutChanged();
 	},
 	
 	layout: function()
@@ -51,9 +42,6 @@ var Main = new Class({
 		
 		// the whole west column needs an update
 		$( 'west' ).setStyle( 'height', winSize.y - 42 );
-		
-		// update scrollers
-		main.tags.scrollBar.update();
 	},
 	
 	// this gets called whenever the MooLayout resizes so that the list wrapper
@@ -61,8 +49,6 @@ var Main = new Class({
 	{
 		// we grab the MooLayout window size and subtract our gray header bar
 		$( 'taskListWrapper' ).setStyle( 'height', main.mooLayout.windows[0].getSize().y - 24 );
-		
-		main.scrollBar.update();
 	},
 	
 	alert: function( message, title )

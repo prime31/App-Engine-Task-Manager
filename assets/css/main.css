@@ -4,8 +4,8 @@
 }
 
 .task-lists {
-  /*-moz-box-shadow: 0 2px 0 #C4CDD6;*/
-  position: relative;
+	position: relative;
+	overflow: hidden;
 }
 
 /* top grey bar */
@@ -172,17 +172,19 @@ h3.project .back:hover ins, h3.project .completed:hover ins {
 }
 
 .task-actions li {
-	-moz-box-shadow: -1px 0 0 #B7B7B7 inset;
-	background-image: -moz-linear-gradient(center top , #FFFFFF 0pt, #F0F0F0 50%, #E0E0E0 50%, #D7D7D7 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FFFFFF), color-stop(50%,#F0F0F0), color-stop(50%,#E0E0E0), color-stop(100%,#D7D7D7));
-	float: left;
-	height: 23px;
-	text-indent: -9999px;
-	width: 24px;
-}
-
-.task-action li.dragging {
-	background-color: red;
+	float:left;
+	width:24px;
+	height:23px;
+	text-indent:-9999px;
+	background-image:-moz-linear-gradient(top,#fff 0,#f0f0f0 50%,#e0e0e0 50%,#d7d7d7 100%);
+	background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#fff),color-stop(0.5,#f0f0f0),color-stop(0.5,#e0e0e0),color-stop(1,#d7d7d7));
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff',EndColorStr='#d7d7d7');
+	-moz-background-clip:padding-box;
+	-webkit-background-clip:padding-box;
+	background-clip:padding-box;
+	-moz-box-shadow:inset -1px 0 0 #b7b7b7;
+	-webkit-box-shadow:inset -1px 0 0 #b7b7b7;
+	box-shadow:inset -1px 0 0 #b7b7b7;
 }
 
 .task-actions li a {
@@ -220,6 +222,8 @@ h3.project .back:hover ins, h3.project .completed:hover ins {
 	-moz-border-radius-topleft: 25px;
 	-webkit-border-radius-bottomleft: 25px;
 	-webkit-border-radius-topleft: 25px;
+	border-top-left-radius:25px;
+	border-bottom-left-radius:25px;
 	padding-left: 1px;
 }
 
@@ -232,8 +236,17 @@ h3.project .back:hover ins, h3.project .completed:hover ins {
 	-webkit-box-shadow: none;
 }
 
+#taskListWrapper {
+	overflow-y: auto;
+	overflow-x: hidden;
+}
 
-
+#taskList li.dragging {
+	z-index: 100;
+	-moz-box-shadow: 0px 0px 8px #D1CDD4;
+	-webkit-box-shadow: 0px 0px #D1CDD4;
+	box-shadow: 0px 0px 8px #D1CDD4;
+}
 
 
 

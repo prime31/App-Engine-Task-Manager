@@ -19,20 +19,20 @@
         top: 0;
         left: 0;
 		margin-left: -1px;
-        background: #E2E9F1 url( /assets/images/mooLayoutHandle.png ) 50% 3px no-repeat;
+        background: #E2E9F1 url( /assets/images/mooLayoutHandle.png ) 50% 2px no-repeat;
     }
 
     #mooLayoutContent .mooLayoutTop {
-        height: 25%;
+        height: 35%;
         position: absolute;
         top: -6px;
 		margin-bottom: 6px;
-		overflow-y: hidden;
+		overflow-y: auto;
 		background-color: #fff;
     }
 
     #mooLayoutContent .mooLayoutBottom {
-        height: 75%;
+        height: 65%;
         position: absolute;
         bottom: -6px;
         overflow: auto;

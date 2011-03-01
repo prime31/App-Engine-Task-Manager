@@ -297,8 +297,9 @@
 
 #taskForm .meta textarea {
 	line-height: 16px;
-	max-height: 300px;
+	max-height: 350px;
 	height: 150px;
+	width: 100%;
 	padding: 0 0 5px;
 	min-height: 20px;
 }

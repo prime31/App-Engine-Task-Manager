@@ -3,6 +3,7 @@ main.comments = {
 	taskId: null,
 	view: null,
 	backArrowLink: null,
+	spinner: null,
 	
 	init: function()
 	{
@@ -12,6 +13,18 @@ main.comments = {
 		
 		this.backArrowLink = $( 'main' ).getElement( 'h3.project > a.back' );
 		this.backArrowLink.addEvent( 'click', this.hideTaskDetails );
+	},
+	
+	showSpinner: function( shouldShow )
+	{
+		// lazily create the spinner
+		if( main.tasks.spinner == null )
+			main.tasks.spinner = new Spinner( 'main', { hideOnClick: true, maskMargins: true, fxOptions: { duration: 0.1 } } );
+		
+		if( shouldShow )
+			main.tasks.spinner.show();
+		else
+			main.tasks.spinner.hide();
 	},
 	
 	hideTaskDetails: function()
@@ -26,6 +39,15 @@ main.comments = {
 	
 	showTaskDetails: function( taskId, projectId )
 	{
+		main.comments.showSpinner( true );
+		
+		// dont allow two of these!
+		if( main.comments.view )
+		{
+			main.comments.view.destroy();
+			main.comments.view = null;
+		}
+		
 		this.backArrowLink.getElement( 'ins' ).removeClass( 'hide' );
 		
 		this.projectId = projectId;
@@ -37,26 +59,12 @@ main.comments = {
 	
 	taskDetailsLoaded: function( task )
 	{
+		main.comments.showSpinner( false );
+		
 		// inject the comments view
 		var dim = $( 'main' ).getCoordinates();
 		var winSize = window.getSize();
 
-		/*
-		main.comments.view = new Element( 'div',
-		{
-		    styles: {
-		        zIndex: 5,
-		        position: 'absolute',
-		        top: dim.top + 23,
-		        left: dim.left,
-		        width: dim.width,
-		        height: winSize.y - dim.top - 23, // window - top - grey header bar
-		        backgroundColor: '#fff',
-				overflowY: 'auto'
-		    }
-		});
-		*/
-		
 		main.comments.view = new Element( 'div',
 		{
 		    styles: {
@@ -79,7 +87,7 @@ main.comments = {
 		
 		var tagsList = template.getElement( 'ul.task-tags-list' );
 		
-		if( tagsList.length > 0 )
+		if( task.tags.length > 0 )
 		{
 			task.tags.each( function( tag )
 			{
