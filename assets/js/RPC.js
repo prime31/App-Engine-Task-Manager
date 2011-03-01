@@ -1,4 +1,4 @@
-function Project(){ return this; }
+function Project(){}
 Project.prototype = {
 	id: null,
 	created: null,
@@ -7,7 +7,6 @@ Project.prototype = {
 	fromJson: function( json )
 	{
 		Object.merge( this, json );
-		return this;
 	}
 };
 
@@ -25,7 +24,8 @@ Project.loadProjects = function( completionHandler, failedHandler )
 			
 			res.projects.each( function( item )
 			{
-				var p = new Project().fromJson( item );
+				var p = new Project();
+				p.fromJson( item );
 				projects.push( p );
 			});
 			completionHandler( projects, res.tags );
@@ -52,7 +52,8 @@ Project.add = function( projectName, complete )
 				// reload everything
 				Project.loadProjects( main.projectsLoaded, main.projectLoadFailed );
 				
-				var p = new Project().fromJson( res.data );
+				var p = new Project();
+				p.fromJson( res.data );
 				complete( p );
 				main.alert( 'New project added' );
 			}
@@ -158,7 +159,7 @@ Project.remove = function( projectId )
 
 
 // ########### Tasks #############
-function Task(){ return this; }
+function Task(){ this.tags = []; this.comments = []; this.images = []; }
 Task.prototype = {
 	id: null,
 	parent: null,
@@ -169,7 +170,7 @@ Task.prototype = {
 	important: null,
 	completed: null,
 	projectName: null,
-	tags: null,
+	tags: [],
 	comments: [],
 	images: [],
 	
@@ -180,8 +181,6 @@ Task.prototype = {
 		// fix the bools
 		this.important = this.important == 'True';
 		this.completed = this.completed == 'True';
-		
-		return this;
 	}
 
 };
@@ -203,7 +202,8 @@ Task.getTasksForProjectIdOrTag = function( projectIdOrTag, complete, failed )
 			
 			res.each( function( item )
 			{
-				var t = new Task().fromJson( item );
+				var t = new Task();
+				t.fromJson( item );
 				tasks.push( t );
 			});
 			complete( tasks );
@@ -235,19 +235,22 @@ Task.getTask = function( taskId, projectId, complete )
 			}
 
 			// convert our tasks
-			var task = new Task().fromJson( res.task );
-			
+			var task = new Task();
+			task.fromJson( res.task );
+
 			// convert the comments
 			res.comments.each( function( item )
 			{
-				var c = new Comment().fromJson( item );
+				var c = new Comment();
+				c.fromJson( item );
 				task.comments.push( c );
 			});
 			
 			// convert the images
 			res.images.each( function( item )
 			{
-				var i = new Image().fromJson( item );
+				var i = new Image();
+				i.fromJson( item );
 				task.images.push( i );
 			});
 			complete( task );
@@ -277,7 +280,8 @@ Task.getAllCompleted = function( complete, failed )
 			
 			res.each( function( item )
 			{
-				var t = new Task().fromJson( item );
+				var t = new Task();
+				t.fromJson( item );
 				tasks.push( t );
 			});
 			complete( tasks );
@@ -402,7 +406,9 @@ Task.addNew = function( projectId, title, description, tags, complete )
 			}
 			else
 			{
-				complete( new Task().fromJson( res.data ) );
+				var t = new Task();
+				t.fromJson( res.data );
+				complete( t );
 				main.alert( 'New task added' );
 			}
 		},
@@ -533,7 +539,7 @@ Tags.remove = function( tag )
 
 
 // ########### Comments #############
-function Comment(){ return this; }
+function Comment(){}
 Comment.prototype = {
 	id: null,
 	text: null,
@@ -543,7 +549,6 @@ Comment.prototype = {
 	fromJson: function( json )
 	{
 		Object.merge( this, json );
-		return this;
 	}
 
 };
@@ -564,7 +569,9 @@ Comment.add = function( projectId, taskId, comment, complete )
 			}
 			else
 			{
-				complete( new Comment().fromJson( res.data ) );
+				var c = new Comment();
+				c.fromJson( res.data );
+				complete( c );
 				main.alert( 'Comment added' );
 			}
 		},
@@ -602,7 +609,7 @@ Comment.remove = function( projectId, taskId, commentId )
 
 
 // ########### Images #############
-function Image(){ return this; }
+function Image(){}
 Image.prototype = {
 	id: null,
 	url: null,
@@ -611,7 +618,6 @@ Image.prototype = {
 	fromJson: function( json )
 	{
 		Object.merge( this, json );
-		return this;
 	}
 
 };

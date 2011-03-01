@@ -18,13 +18,13 @@ main.comments = {
 	showSpinner: function( shouldShow )
 	{
 		// lazily create the spinner
-		if( main.tasks.spinner == null )
-			main.tasks.spinner = new Spinner( 'main', { hideOnClick: true, maskMargins: true, fxOptions: { duration: 0.1 } } );
+		if( main.comments.spinner == null )
+			main.comments.spinner = new Spinner( $( 'main' ).getElement( 'div.mooLayoutBottom' ), { hideOnClick: true, maskMargins: true, fxOptions: { duration: 0.1 } } );
 		
 		if( shouldShow )
-			main.tasks.spinner.show();
+			main.comments.spinner.show();
 		else
-			main.tasks.spinner.hide();
+			main.comments.spinner.hide();
 	},
 	
 	hideTaskDetails: function()
@@ -75,7 +75,7 @@ main.comments = {
 		});
 		
 		// grab the template and fill in our values
-		var template = document.id( 'commentsPage' ).getChildren()[0].clone();
+		var template = document.id( 'commentsPage' ).getFirst().clone();
 		
 		template.getElement( 'span.task-title').set( 'html', task.title );
 		
