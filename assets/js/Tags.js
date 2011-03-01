@@ -65,6 +65,10 @@ main.tags = {
 	{
 		Array.from( tags ).each( function( tag )
 		{
+			// dont add duplicates!
+			if( main.tags.items.contains( tag ) )
+				return;
+			
 			// keep stock of our tags
 			main.tags.items.include( tag );
 			
