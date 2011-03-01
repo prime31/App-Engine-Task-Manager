@@ -30,8 +30,13 @@ main.tasks = {
 		{
 			evt.stop();
 			
+			// get the li holding this link then deselect the selected task
+			var li = ele.getParent( 'li[data-id]' );
+			main.tasks.deselectAllTasks();
+			
 			// grab the task and show the comments screen
-			var taskId = parseInt( ele.getParent( 'li[data-id]' ).getAttribute( 'data-id' ) );
+			li.addClass( 'selected' );
+			var taskId = parseInt( li.getAttribute( 'data-id' ) );
 			var task = main.tasks.getTaskForTaskId( taskId );
 			main.comments.showTaskDetails( taskId, task.parent );
 		});
@@ -44,7 +49,8 @@ main.tasks = {
 		{
 			evt.stop();
 			
-			// clear out our comments if we are showing them
+			// clear out our comments if we are showing them and deselect the current task
+			main.tasks.deselectAllTasks();
 			main.comments.hideTaskDetails();
 			
 			main.deselectProjectAndTag();
@@ -111,6 +117,11 @@ main.tasks = {
 			main.tasks.spinner.show();
 		else
 			main.tasks.spinner.hide();
+	},
+	
+	deselectAllTasks: function()
+	{
+		main.tasks.ele.getElements( 'li.selected' ).removeClass( 'selected' );
 	},
 	
 	// list events
@@ -250,6 +261,7 @@ main.tasks = {
 		Task.markComplete( taskId, task.parent, complete )
 	},
 	
+	// tasks can be a single Task or an array of Tasks
 	addTasks: function( tasks )
 	{
 		var tasks = Array.from( tasks );
@@ -308,7 +320,7 @@ main.tasks = {
 		main.tasks.removeTasks( this.ele.getChildren( 'li' ) );
 	},
 	
-	// tasks can be an array or single element
+	// tasks can be an array or single element (the actual li)
 	removeTasks: function( tasks )
 	{
 		var tasks = Array.from( tasks );

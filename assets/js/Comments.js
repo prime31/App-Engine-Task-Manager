@@ -29,6 +29,8 @@ main.comments = {
 	
 	hideTaskDetails: function()
 	{
+		main.tasks.deselectAllTasks();
+		
 		if( main.comments.view )
 		{
 			main.comments.backArrowLink.getElement( 'ins' ).addClass( 'hide' );

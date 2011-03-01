@@ -63,7 +63,7 @@ h3.project .back:hover ins, h3.project .completed:hover ins {
 	border-bottom: 1px solid #ECECEC;
 	color: #444444;
 	font-size: 12px;
-	height: 37px;
+	height: 32px;
 	position: relative;
 }
 
@@ -75,7 +75,7 @@ h3.project .back:hover ins, h3.project .completed:hover ins {
 	height: 13px;
 	left: 15px;
 	position: absolute;
-	top: 8px;
+	top: 6px;
 	width: 13px;
 }
 
@@ -84,14 +84,13 @@ h3.project .back:hover ins, h3.project .completed:hover ins {
 	font-family: Arial,Helvetica,sans-serif;
 	margin-left: 48px;
 	white-space: nowrap;
-	line-height: 35px;
+	line-height: 32px;
 	height: 100%;
 }
 
 
 /* third div */
 .task .overlay {
-	background: none repeat scroll 0 0 #FFFFFF;
 	display: block;
 	position: absolute;
 	right: 10px;
@@ -106,11 +105,16 @@ h3.project .back:hover ins, h3.project .completed:hover ins {
 	background: url("/assets/images/action-flag.png") no-repeat scroll 9px 14px transparent;
 	display: block;
 	float: right;
-	height: 37px;
+	height: 32px;
 	margin: 0;
 	width: 32px;
 	cursor: pointer;
 	opacity: 0.1;
+}
+
+.task:hover .flagged {
+	visibility: hidden;
+	width: 10px;
 }
 
 .task .flaggedOn {
@@ -121,7 +125,7 @@ h3.project .back:hover ins, h3.project .completed:hover ins {
 /* tags */
 .task .overlay ul.tags {
 	float: right;
-	line-height: 34px;
+	line-height: 27px;
 	margin-top: 1px;
 	white-space: nowrap;
 }
@@ -164,7 +168,7 @@ h3.project .back:hover ins, h3.project .completed:hover ins {
 	height: 23px;
 	position: absolute;
 	right: 14px;
-	top: 6px;
+	top: 3px;
 }
 
 .task:hover .task-actions {
@@ -248,5 +252,13 @@ h3.project .back:hover ins, h3.project .completed:hover ins {
 	box-shadow: 0px 0px 8px #D1CDD4;
 }
 
+#taskList li.selected {
+	background: -moz-linear-gradient(top, #4C99FD 0%, #226BE4 100%); /* firefox */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#4C99FD), color-stop(100%,#226BE4)); /* webkit */	
+}
+
+#taskList li.selected div.task-main > a, #taskList li.selected div.task-main > a:visited, #taskList li.selected strong {
+	color: #fff;
+}
 
 
