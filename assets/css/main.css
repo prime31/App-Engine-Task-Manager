@@ -27,6 +27,15 @@
 	text-transform: uppercase;
 }
 
+#createProjectHelp {
+	background: url( /assets/images/createTasks.png );
+	position: absolute;
+	top: 25px;
+	left: 16px;
+	width: 203px;
+	height: 30px;
+}
+
 h3.project .back {
 	padding: 0 0 0 25px;
 	text-decoration: none;
@@ -265,4 +274,51 @@ li.selected .overlay ul.tags li a {
 	color: #fff;
 }
 
+/* non selected task view */
+.zero-state {
+	position: absolute;
+	left: 50%;
+    margin-left: -200px;
+	top: 40%;
+	z-index: -1;
+	width: 400px;
+	-moz-border-radius: 5px 5px 5px 5px;
+	-webkit-border-radius: 5px 5px 5px 5px;
+	border-radius: 5px 5px 5px 5px;
+	-moz-box-shadow: 0 1px 1px #B4BCC3 inset, 0 1px 1px #DCE9F3;
+	-webkit-box-shadow: 0 1px 1px #B4BCC3 inset, 0 1px 1px #DCE9F3;
+	box-shadow: 0 1px 1px #B4BCC3 inset, 0 1px 1px #DCE9F3;
+	background: none repeat scroll 0 0 #CAD3DB;
+	border-color: #787F85 #9BA3AB #9BA3AB;
+	border-right: 1px solid #9BA3AB;
+	border-style: solid;
+	border-width: 1px;
+	color: #333333;
+	font-size: 14px;
+	font-weight: bold;
+
+	text-shadow: 0 1px 0 #E7EDF5;
+	word-wrap: break-word;
+}
+
+
+.zero-state .text {
+	background-image: url( /assets/images/icon-project.png );
+	background-position: 20px 13px;
+	background-repeat: no-repeat;
+	min-height: 50px;
+	padding: 15px 20px 15px 90px;
+}
+
+.zero-state h4 {
+	font-size: 14px;
+	font-weight: bold;
+	margin: 0 0 5px;
+}
+
+.zero-state p {
+	font-size: 12px;
+	font-weight: normal;
+	line-height: 16px;
+}
 
