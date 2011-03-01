@@ -87,7 +87,7 @@ var Main = new Class({
 	
 	setTitle: function( title )
 	{
-		$$( 'title' )[0].innerHTML = title;
+		document.title = title;
 	}
 
 });

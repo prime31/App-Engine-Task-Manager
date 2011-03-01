@@ -244,7 +244,7 @@ h3.project .back:hover ins, h3.project .completed:hover ins {
 #taskList li.dragging {
 	z-index: 100;
 	-moz-box-shadow: 0px 0px 8px #D1CDD4;
-	-webkit-box-shadow: 0px 0px #D1CDD4;
+	-webkit-box-shadow: 0px 0px 8px #D1CDD4;
 	box-shadow: 0px 0px 8px #D1CDD4;
 }
 

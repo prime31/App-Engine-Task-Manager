@@ -38,7 +38,7 @@ prompts.tagConfig = {
 			return false; 
 		}
 	},
-	delete:
+	'delete':
 	{
 		html:'Are you sure you want to delete this tag?',
 		buttons: { Back: 1, Delete: 2 },
@@ -95,7 +95,7 @@ prompts.projectConfig = {
 			return false; 
 		}
 	},
-	delete:
+	'delete':
 	{
 		html:'Are you sure you want to delete this project?',
 		buttons: { Back: 1, Delete: 2 },
