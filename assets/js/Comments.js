@@ -4,6 +4,7 @@ main.comments = {
 	view: null,
 	backArrowLink: null,
 	spinner: null,
+	taskRequest: null,
 	
 	init: function()
 	{
@@ -42,6 +43,8 @@ main.comments = {
 	showTaskDetails: function( taskId, projectId )
 	{
 		main.comments.showSpinner( true );
+		if( main.comments.taskRequest )
+			main.comments.taskRequest.cancel();
 		
 		// dont allow two of these!
 		if( main.comments.view )
@@ -56,11 +59,12 @@ main.comments = {
 		this.taskId = taskId;
 		
 		// grab the task details
-		Task.getTask( taskId, projectId, this.taskDetailsLoaded );
+		main.comments.taskRequest = Task.getTask( taskId, projectId, this.taskDetailsLoaded );
 	},
 	
 	taskDetailsLoaded: function( task )
 	{
+		main.comments.taskRequest = null;
 		main.comments.showSpinner( false );
 		
 		// inject the comments view
