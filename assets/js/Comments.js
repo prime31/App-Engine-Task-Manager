@@ -106,6 +106,32 @@ main.comments = {
 			tagsList.destroy();
 		}
 		
+		// add our images
+		main.comments.addImages( task.images, template );
+		
+		// listen for remove button clicks on the images
+		template.getElement( 'ul.image-list' ).addEvent( 'click:relay(li a.remove)', function( evt, ele )
+		{
+			evt.stop();
+			
+			var li = ele.getParent( 'li' );
+			var imageId = li.getAttribute( 'data-id' );
+			
+			$prompt.show( 'Are you sure you want to remove this image?',
+			{
+				buttons: { Cancel: false, Remove: true,  },
+				callback: function( v, m, f )
+				{
+					if( v )
+					{
+						Image.remove( main.comments.projectId, main.comments.taskId, imageId );
+						li.destroy();
+					}
+					return true;
+				}
+			});
+		});
+		
 		// listen for tag clicks
 		tagsList.addEvent( 'click:relay(li)', function( evt, ele )
 		{
@@ -167,12 +193,12 @@ main.comments = {
 		// injection!
 		template.inject( main.comments.view );
 		main.comments.view.inject( $( 'main' ).getElement( 'div.mooLayoutBottom' ) );
-		//main.comments.view.inject( document.body );
 		
 		main.comments.view.scrollTo( 0, 0 );
 		
-		// setup the textbox expander
+		// setup the textbox expander and the image uploader
 		new DynamicTextarea( template.getElement( 'textarea.body' ) );
+		main.images.setup( main.comments.projectId, task.id );
 	},
 	
 	injectComment: function( comment, list, highlight )
@@ -182,7 +208,7 @@ main.comments = {
 			main.comments.view.list = getElement( 'ul.activities-list' );
 		
 		var commentTemplate = document.id( 'commentTemplate' ).getChildren()[0].clone();
-		commentTemplate.getElement( 'div.header' ).set( 'html', comment.created );
+		commentTemplate.getElement( 'div.header' ).set( 'html', comment.created.timeDiffInWords() );
 		commentTemplate.getElement( 'div.content' ).set( 'html', comment.text.replace( /\n/g, '<br />' ) );
 		
 		// set the id for later use
@@ -191,7 +217,117 @@ main.comments = {
 		commentTemplate.inject( list );
 		
 		if( highlight )
-			commentTemplate.highlight();
-	}
+			commentTemplate.highlight.delay( 250, commentTemplate );
+	},
 	
+	// images can be an array or single Image
+	addImages: function( images, listParentElement, highlight )
+	{
+		images = Array.from( images );
+		
+		if( typeOf( listParentElement ) != 'element' )
+			listParentElement = main.comments.view;
+		
+		var list = listParentElement.getElement( 'ul.image-list' );
+		images.each( function( i )
+		{
+			var li = Elements.from( '<li class="tag"><a href="' + i.url + '" target="_blank">' + i.filename + '</a><a class="remove"></a></li>' );
+			li[0].setAttribute( 'data-id', i.id );
+			li[0].inject( list );
+			
+			if( highlight )
+				li[0].highlight.delay( 250, li[0] );
+		});
+	}
 };
+
+main.images = {
+	uploader: null,
+	
+	setup: function( projectId, taskId )
+	{
+		// kill any existing uploaders
+		if( main.images.uploader )
+			main.images.uploader.destroySelf();
+		
+		var list = main.comments.view.getElement( 'ul.file-list' );
+		var buttons = main.comments.view.getElements( 'a.file-attach-button' );
+		
+		main.images.uploader = new FancyUpload.Attach( list, buttons,
+		{
+			path: '/assets/Swiff.Uploader.swf',
+			url: '/images/add',
+			fileSizeMax: 2 * 1024 * 1024,
+			verbose: false,
+			data: { taskId: taskId, projectId: projectId },
+			queued: false,
+			instantStart: true,
+			//typeFilter: { 'Images (*.jpg, *.jpeg, *.gif, *.png)': '*.jpg; *.jpeg; *.gif; *.png' },
+
+			onSelectFail: function( files )
+			{
+				files.each( function( file )
+				{
+					new Element( 'li',
+					{
+						'class': 'file-invalid',
+						events: {
+							click: function()
+							{
+								this.destroy();
+							}
+						}
+					}).adopt(
+						new Element( 'span', { html: file.validationErrorMessage || file.validationError })
+					).inject( this.list, 'bottom' );
+				}, this );	
+			},
+
+			onFileSuccess: function( file )
+			{
+				// decode our return into a valid Image or fail
+				var res = JSON.decode( file.response.text );
+				if( !res.result )
+				{
+					alert( res.error );
+					return;
+				}
+				
+				var image = new Image();
+				image.fromJson( res.data );
+				main.comments.addImages( image );
+				
+				file.ui.element.highlight( '#e6efc2' );
+			},
+
+			onFileError: function(file)
+			{
+				file.ui.cancel.set( 'html', 'Retry' ).removeEvents().addEvent( 'click', function()
+				{
+					file.requeue();
+					return false;
+				});
+
+				new Element( 'span',
+				{
+					html: file.errorMessage,
+					'class': 'file-error'
+				}).inject( file.ui.cancel, 'after' );
+			},
+
+			onFileRequeue: function( file )
+			{
+				file.ui.element.getElement( '.file-error' ).destroy();
+
+				file.ui.cancel.set( 'html', 'Cancel' ).removeEvents().addEvent( 'click', function()
+				{
+					file.remove();
+					return false;
+				});
+
+				this.start();
+			}
+
+		});
+	}
+}

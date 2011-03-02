@@ -45,8 +45,8 @@ class AddImage( webapp.RequestHandler ):
 			# input marshalling
 			projectId = int( self.request.get( 'projectId' ) )
 			taskId = int( self.request.get( 'taskId' ) )
-			filename = self.request.POST['image'].filename
-			imageData = self.request.get( 'image' )
+			filename = self.request.POST['Filedata'].filename
+			imageData = self.request.get( 'Filedata' )
 			
 			# grab the task
 			task = Task.get_by_id( taskId, Key.from_path( 'Project', projectId ) )
@@ -55,8 +55,11 @@ class AddImage( webapp.RequestHandler ):
 			theImage = db.Blob( imageData )
 			i = Image( parent = task, filename = filename, image = theImage )
 			i.put()
+			
+			result['data'] = i.toDict()
 
 		except Exception, e:
+			logging.error( e )
 			result['result'] = False
 			result['error'] = 'Error: %s' % e
 

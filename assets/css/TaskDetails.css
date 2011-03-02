@@ -37,6 +37,62 @@
 	display: block;
 }
 
+/* images right bar */
+.task-detail .task-images {
+	float: right;
+	width: 370px;
+	margin-right: 10px;
+}
+
+.task-detail .task-images .content {
+	min-height: 20px;
+	font-size: 12px;
+	margin: 10px 20px;
+	padding: 5px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	-moz-box-shadow: 0 1px 1px #B4BCC3 inset, 0 1px 1px #DCE9F3;
+	-webkit-box-shadow: 0 1px 1px #B4BCC3 inset, 0 1px 1px #DCE9F3;
+	box-shadow: 0 1px 1px #B4BCC3 inset, 0 1px 1px #DCE9F3;
+	background: none repeat scroll 0 0 #F5F5F5;
+	border-color: #787F85 #9BA3AB #9BA3AB;
+	border-right: 1px solid #9BA3AB;
+	border-style: solid;
+	border-width: 1px;
+	color: #333333;
+	font-size: 12px;
+	font-weight: bold;
+	text-shadow: 0 1px 0 #E7EDF5;
+	word-wrap: break-word;
+}
+
+.task-detail .uploader {
+	margin: 20px 20px;
+	
+}
+
+.task-images li {
+  height: 18px;
+  line-height: 18px;
+  margin: 0 0 4px;
+  position: relative;
+}
+
+.task-images li {
+	height: 18px;
+	line-height: 18px;
+	margin: 0 0 4px;
+	position: relative;
+	background: url("/assets/images/attach.png") no-repeat scroll 1px 50% transparent;
+	padding-left: 25px;
+}
+
+/* main comment area */
+.task-detail .task-updates {
+	margin-right: 370px;
+}
+
 .task-notes-wrap .task-notes-wrap-inner {
 	-moz-border-radius-bottomleft: 4px;
 	-moz-border-radius-bottomright: 4px;
@@ -93,7 +149,7 @@
 
 .task-detail .activities {
 	padding: 0 20px;
-	width: 700px;
+	width: 90%;
 }
 
 .activity {
@@ -127,7 +183,7 @@
 	font-size: 12px;
 }
 
-.task-detail .activities .activity .header, .task-detail .activities .activity a.remove {
+.task-detail .activities .activity .header {
 	overflow: auto;
 	padding: 0 0 5px 8px;
 	color: #AAAAAA;
@@ -138,34 +194,31 @@
 	white-space: nowrap;
 }
 
-.task-detail .activities .activity a.remove {
+.task-detail .activities .activity a.remove, .image-list a.remove {
 	display: none;
-	-moz-border-radius: 3px 3px 3px 3px;
-	-webkit-border-radius: 3px 3px 3px 3px;
-	background-color: #888888;
-	border: 1px solid #111111;
 	color: #FFFFFF;
 	float: right;
-	font-family: Helvetica;
-	height: 12px;
-	margin: -2px 0 0 10px;
-	opacity: 0.7;
-	padding: 1px 3px;
-	text-align: center;
-	width: 8px;
+	height: 16px;
+	width: 16px;
+	opacity: 0.5;
+	margin-left: 5px;
+	background: no-repeat url( /assets/images/close.png );
+}
+
+.task-detail .activities .activity a.remove {
+	margin-top: -2px;
 }
 
 .task-detail .activities .activity:hover {
 	background-color: rgba( 200, 200, 200, 0.1 );
 }
 
-.task-detail .activities .activity:hover a.remove {
+.task-detail .activities .activity:hover a.remove, .image-list .tag:hover a.remove {
 	display: block;
 }
 
-.task-detail .activities .activity a.remove:hover {
-	background: -moz-linear-gradient(top, #4598F7 0%, #0E7CF2 100%); /* firefox */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#4598F7), color-stop(100%,#0E7CF2)); /* webkit */
+.task-detail .activities .activity a.remove:hover, .image-list .tag a.remove:hover {
+	opacity: 0.9;
 }
 
 .task-detail .activities .activity .content {
@@ -268,11 +321,11 @@
 	float: right;
 }
 
-.comment-form .footer li .button.upload {
+.comment-form .footer li .button.upload, .task-images .file-attach-button {
 	min-width: 50px;
 }
 
-.comment-form .footer li .button {
+.comment-form .footer li .button, .task-images .button {
 	height: 22px;
 	line-height: 22px;
 	padding: 0 12px;

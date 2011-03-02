@@ -1,3 +1,10 @@
+function localDateFromString( str )
+{
+	// kill the trailing milliseconds and add a utc ofset
+	str = str.substring( 0, str.indexOf( '.' ) );
+	return Date.parse( str + '-0000' );
+}
+
 function Project(){}
 Project.prototype = {
 	id: null,
@@ -549,6 +556,7 @@ Comment.prototype = {
 	fromJson: function( json )
 	{
 		Object.merge( this, json );
+		this.created = localDateFromString( this.created );
 	}
 
 };
@@ -620,4 +628,27 @@ Image.prototype = {
 		Object.merge( this, json );
 	}
 
+};
+
+Image.remove = function( projectId, taskId, imageId )
+{
+	var params = { projectId: projectId, taskId: taskId, imageId: imageId };
+	
+	var jsonRequest = new Request.JSON
+	({
+		url: '/images/remove',
+		onSuccess: function( res )
+		{
+			if( !res.result )
+				alert( res.error );
+			else
+				main.alert( 'Image removed' );
+		},
+		onFailure: function( xhr )
+		{
+			alert( 'Failed to remove image' );
+		}
+	}).post( params );
+	
+	return jsonRequest;
 };
