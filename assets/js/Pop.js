@@ -146,11 +146,10 @@ main.pop = {
 			});
 			main.pop.newTaskOvertextSetup = true;
 		}
-		
+
 		var pop = $( 'taskPopover' );
 		pop.removeClass( 'hide' );
 		pop.position( { relativeTo: relativeTo, offset: { x: 0, y: 105 } });
-		main.pop.resetNewTaskForm();
 		
 		// show the mask
 		main.pop.mask.show();
@@ -174,6 +173,9 @@ main.pop = {
 			main.pop.dynamicText.checkSize();
 			main.pop.validateNewTask();
 		}
+		
+		pop.position( { relativeTo: relativeTo, offset: { x: 0, y: 105 } });
+		main.pop.resetNewTaskForm();
 	},
 	
 	validateNewTask: function()
@@ -268,7 +270,10 @@ main.pop = {
 		$$( '#taskPopover input, #taskPopover textarea' ).retrieve( 'OverText' ).each( function( item )
 		{
 		    if( item != null )
-		        item.show();
+		    {
+				item.show();
+				item.reposition();
+			}
 		});
 		
 		// clean up the state of the save button
