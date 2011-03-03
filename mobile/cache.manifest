@@ -1,0 +1,24 @@
+CACHE MANIFEST
+# Rev 2
+
+/index-mobile.html
+http://code.jquery.com/mobile/1.0a3/jquery.mobile-1.0a3.min.css
+http://code.jquery.com/jquery-1.5.min.js
+http://code.jquery.com/mobile/1.0a3/jquery.mobile-1.0a3.min.js
+/mobile/jqt.offline.js
+/mobile/site.js
+/mobile/json.js
+/mobile/MooToolsAdapter.js
+/assets/js/RPC.js
+
+/mobile/mobile.css
+/mobile/images/ajax-loader.png
+/mobile/images/form-check-off.png
+/mobile/images/form-check-on.png
+/mobile/images/form-radio-off.png
+/mobile/images/form-radio-on.png
+/mobile/images/icon-search-black.png
+/mobile/images/icons-18-black.png
+/mobile/images/icons-18-white.png
+/mobile/images/icons-36-black.png
+/mobile/images/icons-36-white.png

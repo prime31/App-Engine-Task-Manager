@@ -28,7 +28,7 @@ Project.loadProjects = function( completionHandler, failedHandler )
 		{
 			// convert our projects
 			var projects = [];
-			
+
 			res.projects.each( function( item )
 			{
 				var p = new Project();
@@ -422,6 +422,37 @@ Task.addNew = function( projectId, title, description, tags, complete )
 		onFailure: function( xhr )
 		{
 			alert( 'Adding new task failed' );
+		}
+	}).post( params );
+	
+	return jsonRequest;
+};
+
+// edits an existing task and passes it back to the complete method
+Task.editTask = function( taskId, projectId, title, description, tags, complete )
+{
+	var params = { taskId: taskId, projectId: projectId, title: title, description: description, tags: JSON.encode( tags ) };
+
+	var jsonRequest = new Request.JSON
+	({
+		url: '/tasks/edit',
+		onSuccess: function( res )
+		{
+			if( !res.result )
+			{
+				alert( res.error );
+			}
+			else
+			{
+				var t = new Task();
+				t.fromJson( res.data );
+				complete( t );
+				main.alert( 'Task edited' );
+			}
+		},
+		onFailure: function( xhr )
+		{
+			alert( 'Editing task failed' );
 		}
 	}).post( params );
 	

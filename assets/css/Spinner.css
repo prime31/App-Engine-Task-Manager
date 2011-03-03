@@ -1,8 +1,15 @@
-.spinner {
+.spinner{
 	position: absolute;
 	opacity: 0.9;
 	z-index: 999;
 	background: #fff;
+}
+
+.mask {
+	position: absolute;
+	opacity: 0.4;
+	z-index: 999;
+	background: #333;
 }
 
 .spinner-msg {

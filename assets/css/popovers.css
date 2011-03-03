@@ -15,6 +15,7 @@
 	background: none repeat scroll 0 0 #FFFFFF;
 	border: 1px solid black;
 	z-index: 1000;
+	width: 300px;
 }
 
 .pop-out-header {
@@ -299,7 +300,7 @@
 	line-height: 16px;
 	max-height: 350px;
 	height: 150px;
-	width: 100%;
+	width: 90%;
 	padding: 0 0 5px;
 	min-height: 20px;
 }

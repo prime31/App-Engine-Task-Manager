@@ -24,6 +24,7 @@
 		-webkit-box-shadow: 1px 1px 3px #c8c8c8;
 		box-shadow: 1px 1px 3px #c8c8c8;
 		position: relative;
+		opacity: 0.5;
 	}
 	
 	#tinyalert span{

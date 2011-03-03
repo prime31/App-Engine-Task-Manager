@@ -204,7 +204,13 @@ main.tasks = {
 				main.tasks.toggleTaskImportant( ele, true );
 				break;
 			case 'Edit':
-				console.log( 'edit' );
+				// get the li holding this link then deselect the selected task
+				var li = ele.getParent( 'li[data-id]' );
+				var taskId = li.getAttribute( 'data-id' );
+			
+				// grab the task and show the editor screen
+				var task = main.tasks.getTaskForTaskId( taskId );
+				main.pop.showNewEditTaskForm( li, task );
 				break;
 			case 'Delete':
 				var li = ele.getParent( 'li[data-id]' );

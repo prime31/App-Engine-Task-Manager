@@ -8,9 +8,16 @@ handlers:
   static_files: assets/favicon.ico
   upload: assets/favicon.ico
 
+- url: /mobile/cache.manifest
+  mime_type: text/cache-manifest
+  static_files: mobile/cache.manifest
+  upload: mobile/cache.manifest 
+
 - url: /assets
   static_dir: assets
 
+- url: /mobile
+  static_dir: mobile
 
 
 - url: .*

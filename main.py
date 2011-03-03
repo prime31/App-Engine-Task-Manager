@@ -22,7 +22,14 @@ from Images import *
 class MainHandler( webapp.RequestHandler ):
 	@login_required
 	def get( self ):
-		self.response.out.write( template.render( 'index.html', None ) )
+		uastring = self.request.headers.get( 'user_agent' )
+		logging.error( uastring )
+
+		if "Mobile" in uastring:
+			self.response.out.write( template.render( 'index-mobile.html', None ) )
+			logging.error( 'serving MOBILE index' )
+		else:
+			self.response.out.write( template.render( 'index.html', None ) )
 
 
 class DataTester( webapp.RequestHandler ):
