@@ -133,7 +133,7 @@ var site = {
 	{
 		$.each( tasks, function( i, task )
 		{
-			var html = site.taskLI.replace( 'TITLE', task.title ).replace( 'DESCRIPTION', task.title );
+			var html = site.taskLI.replace( 'TITLE', task.title ).replace( 'DESCRIPTION', task.description );
 			var li = $( html );
 			li.data( 'task', task );
 			li.appendTo( '#tasks ul' );
