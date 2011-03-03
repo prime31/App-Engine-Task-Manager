@@ -1774,7 +1774,8 @@ ol.ui-listview .ui-li-jsnumbering:before {
 .ui-li .ui-btn-inner {
 	display:block;
 	position:relative;
-	padding:.7em 75px .7em 15px}
+	padding:.7em 45px .7em 15px
+}
 
 .ui-li-has-thumb .ui-btn-inner {
 	min-height:60px;
@@ -1829,7 +1830,8 @@ ol.ui-listview .ui-li-jsnumbering:before {
 	width:45%}
 
 .ui-li-has-alt .ui-btn-inner {
-	padding-right:95px}
+	padding-right:45px
+}
 
 .ui-li-count {
 	position:absolute;

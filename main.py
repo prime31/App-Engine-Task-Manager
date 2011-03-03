@@ -23,11 +23,9 @@ class MainHandler( webapp.RequestHandler ):
 	@login_required
 	def get( self ):
 		uastring = self.request.headers.get( 'user_agent' )
-		logging.error( uastring )
 
 		if "Mobile" in uastring:
 			self.response.out.write( template.render( 'index-mobile.html', None ) )
-			logging.error( 'serving MOBILE index' )
 		else:
 			self.response.out.write( template.render( 'index.html', None ) )
 

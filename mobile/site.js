@@ -1,5 +1,5 @@
 var site = {
-	ulMarkup: '<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b" data-filter="true"></ul>',
+	ulMarkup: '<ul data-role="listview" data-inset="false" data-theme="c" data-dividertheme="b" data-filter="true"></ul>',
 	projectLI: '<li><a href="#tasks">TITLE</a></li>',
 	taskLI: '<li><h3><a href="#taskDetails">TITLE</a></h3><p>DESCRIPTION</p><a href="#" data-rel="dialog" data-transition="slideup" data-icon="check"></a></li>',
 	
@@ -12,7 +12,7 @@ var site = {
 	{
 		var content = page.children( 'div[data-role=content]' ).empty();
 		var ul = $( site.ulMarkup );
-		content.append( ul );		
+		content.append( ul );
 	},
 	
 	init: function()
@@ -157,6 +157,11 @@ var site = {
 		// get the comments from the server
 		Task.getTask( site.task.id, site.project.id, function( task )
 		{
+			// Add a divider with our task name and description
+			$( '<li data-role="list-divider">' + site.task.title + '</li>' ).appendTo( '#taskDetails ul' );
+			$( '<li>' + site.task.description + '</li>' ).appendTo( '#taskDetails ul' );
+			$( '<li data-role="list-divider">Comments</li>' ).appendTo( '#taskDetails ul' );
+			
 			$.each( task.comments, function( i, c )
 			{
 				var li = $( '<li>' + c.text + '</li>' );
@@ -175,7 +180,10 @@ $( function()
 {
 	// kill the damn hash loads before we even begin
 	if( window.location.href.indexOf( '#' ) > 0 )
-	    window.location.href = window.location.href.substring( 0, window.location.href.indexOf( '#' ) );
+	{
+		window.location.href = window.location.href.substring( 0, window.location.href.indexOf( '#' ) );
+		return;
+	}
 
 	site.init();
 });
