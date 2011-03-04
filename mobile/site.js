@@ -216,4 +216,3 @@ $( function()
 // Fake alert
 var main = {};
 main.alert = function( text ) {};
-
