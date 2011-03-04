@@ -1993,4 +1993,29 @@ span.ui-slider-label-a {
 span.ui-slider-label-b {
 	right:-100%;
 	margin-left:-1px}
+	
+	
+/* MY OVERRIDES */
+div.scrollerWrapper {
+	height: 418px;
+	overflow: hidden;
+	margin-top: 42px;
+	position: relative;
+}
+
+div.scrollHeader {
+	position: fixed !important;
+}
+
+.ui-li-heading {
+	  display: block;
+	  font-size: 16px;
+	  font-weight: bold;
+	  min-height: 30px;
+	  margin: 0.6em 0;
+}
+
+.ui-li .ui-btn-text {
+	white-space: normal !important;
+}
 

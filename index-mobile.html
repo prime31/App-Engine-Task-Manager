@@ -10,12 +10,10 @@
 
 	<!-- Projects -->
 	<div data-role="page" id="projects">
-
-		<div data-role="header" data-backbtn="false">
+		<div data-role="header" data-backbtn="false" class="scrollHeader">
 			<h1>Projects</h1>
 			<a href="#newProject" data-rel="dialog" data-transition="pop" data-icon="plus" class="ui-btn-right">New</a>
 		</div>
-
 		<div data-role="content">
 			<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b" data-filter="true"></ul>
 		</div>
@@ -38,7 +36,7 @@
 
 	<!-- Tasks -->
 	<div data-role="page" id="tasks">
-		<div data-role="header">
+		<div data-role="header" class="scrollHeader">
 			<a href="#" data-icon="arrow-l" data-rel="back">Projects</a>
 			<h1>Tasks</h1>
 			<a href="#newTask" data-rel="dialog" data-transition="pop" data-icon="plus" class="ui-btn-right">New</a>
@@ -67,7 +65,7 @@
 	
 	<!-- Task Details -->
 	<div data-role="page" id="taskDetails">
-		<div data-role="header">
+		<div data-role="header" class="scrollHeader">
 			<a href="#tasks" data-icon="arrow-l" data-rel="back">Tasks</a>
 			<h1>Task Details</h1>
 			<a href="#newComment" data-rel="dialog" data-transition="pop" data-icon="plus" class="ui-btn-right">New</a>
@@ -94,6 +92,7 @@
 	<script src="/mobile/MooToolsAdapter.js" type="text/javascript"></script>
 	<script src="/assets/js/RPC.js" type="text/javascript"></script>
 	<script type="text/javascript" src="/mobile/site.js"></script>
+	<script type="text/javascript" src="/mobile/iscroll-min.js"></script>
 
 </body>
 </html>

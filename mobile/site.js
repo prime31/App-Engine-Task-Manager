@@ -1,18 +1,33 @@
 var site = {
-	ulMarkup: '<ul data-role="listview" data-inset="false" data-theme="c" data-dividertheme="b" data-filter="true"></ul>',
+	ulMarkup: '<ul data-role="listview" data-inset="false" data-theme="c" data-dividertheme="b" data-filter="false"></ul>',
 	projectLI: '<li><a href="#tasks">TITLE</a></li>',
-	taskLI: '<li><h3><a href="#taskDetails">TITLE</a></h3><p>DESCRIPTION</p><a href="#" data-rel="dialog" data-transition="slideup" data-icon="check"></a></li>',
+	taskLI: '<li><a href="#taskDetails">TITLE</a><a href="#" data-rel="dialog" data-transition="slideup" data-icon="check"></a></li>',
 	
 	tags: null,
 	project: null,
 	task: null,
+	wraps: {},
 	
 	// empties the div and recreates the list
 	prepContentForList: function( page )
 	{
-		var content = page.children( 'div[data-role=content]' ).empty();
+		var content = page.find( 'div[data-role=content]' ).empty();
 		var ul = $( site.ulMarkup );
 		content.append( ul );
+	},
+	
+	setupScroll: function( page )
+	{
+		var str = page.attr( 'id' );
+		var item = page.find( 'div[data-role=content]' );
+		
+		if( !site.wraps[str] )
+		{
+			$( item ).wrap( '<div class="scrollerWrapper"></div>' );
+			site.wraps[str] = true;
+		}
+		
+		new iScroll( item[0], { desktopCompatibility: true });
 	},
 	
 	init: function()
@@ -112,6 +127,8 @@ var site = {
 		
 		$( '#projects ul' ).listview();
 		$.mobile.pageLoading( true );
+		
+		site.setupScroll( $( '#projects' ) );
 	},
 	
 	projectLoadFailed: function( xhr )
@@ -133,7 +150,7 @@ var site = {
 	{
 		$.each( tasks, function( i, task )
 		{
-			var html = site.taskLI.replace( 'TITLE', task.title ).replace( 'DESCRIPTION', task.description );
+			var html = site.taskLI.replace( 'TITLE', task.title );
 			var li = $( html );
 			li.data( 'task', task );
 			li.appendTo( '#tasks ul' );
@@ -141,6 +158,8 @@ var site = {
 		
 		$( '#tasks ul' ).listview();
 		$.mobile.pageLoading( true );
+		
+		site.setupScroll( $( '#tasks' ) );
 	},
 	
 	taskLoadFailed: function( xhr )
@@ -171,6 +190,7 @@ var site = {
 
 			$( '#taskDetails ul' ).listview();
 			$.mobile.pageLoading( true );
+			site.setupScroll( $( '#taskDetails' ) );
 		});
 	}
 
@@ -186,6 +206,10 @@ $( function()
 	}
 
 	site.init();
+
+	// Prevent the whole screen to scroll when dragging elements outside of the scroller (ie:header/footer).
+	document.addEventListener( 'touchmove', function (e) { e.preventDefault(); }, false );
+
 });
 
 

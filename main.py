@@ -27,7 +27,7 @@ class MainHandler( webapp.RequestHandler ):
 		if "Mobile" in uastring:
 			self.response.out.write( template.render( 'index-mobile.html', None ) )
 		else:
-			self.response.out.write( template.render( 'index.html', None ) )
+			self.response.out.write( template.render( 'index-mobile.html', None ) )
 
 
 class DataTester( webapp.RequestHandler ):

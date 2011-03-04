@@ -161,10 +161,10 @@ main.pop = {
 		if( task )
 		{
 			main.pop.task = task;
-			
+
 			// hide the project
 			pop.getElement( 'li.task-project' ).hide();
-			
+
 			var title = $( 'newTaskTitle' ).value = task.title;
 			var projectName = $( 'newTaskProject' ).value = task.projectName;
 			var tags = $( 'newTaskTags' ).value = task.tags.join( ', ' );
@@ -173,9 +173,19 @@ main.pop = {
 			main.pop.dynamicText.checkSize();
 			main.pop.validateNewTask();
 		}
+		else
+		{
+			main.pop.resetNewTaskForm();
+			
+			// stick the project name in there if we are in one
+			var project = main.projects.getProjectForProjectId( main.tasks.currentProjectIdOrTag );
+			console.log( project );
+			if( project )
+				$( 'newTaskProject' ).value = project.name;
+		}
 		
 		pop.position( { relativeTo: relativeTo, offset: { x: 0, y: 105 } });
-		main.pop.resetNewTaskForm();
+		$( 'newTaskTitle' ).focus();
 	},
 	
 	validateNewTask: function()
